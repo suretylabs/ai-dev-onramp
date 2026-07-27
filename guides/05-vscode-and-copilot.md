@@ -98,7 +98,7 @@ Confirm:
 
 - VS Code is signed into the intended GitHub account;
 - the username matches the account used by `gh`;
-- Copilot reports the organization-assigned entitlement as active;
+- Copilot reports the entitlement recorded in `BOOTSTRAP_STATE.md` as active, whether it is organization-managed or the temporary individual path from `03-github-foundation.md`;
 - the current repository remote belongs to the expected organization;
 - Copilot can use the organization-owned repository context under the intended policy;
 - no second GitHub account has been selected accidentally.
@@ -182,6 +182,7 @@ From the discussion, create or refine:
 docs/PROJECT_BRIEF.md
 .github/copilot-instructions.md
 docs/BOOTSTRAP_STATE.md
+docs/DECISIONS.md
 ```
 
 Use the supplied templates as starting structures, not as forms that must be completed mechanically.
@@ -221,6 +222,18 @@ TBD — establish during the Python 3.14 and uv phase.
 ```
 
 That is better than fabricating commands.
+
+### `docs/DECISIONS.md`
+
+This is the durable decision log. For each meaningful architecture or toolchain decision, it should capture:
+
+- the decision and the date it was made;
+- the context that made it necessary;
+- alternatives considered;
+- consequences;
+- the condition that would prompt revisiting it.
+
+Do not duplicate business content that belongs in `docs/PROJECT_BRIEF.md`.
 
 ## Copilot must restate its understanding
 
