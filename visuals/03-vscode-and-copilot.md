@@ -2,6 +2,8 @@
 
 This is the mental-model companion for the integrated workspace and the correct first use of Copilot.
 
+Diagram legend: blue = one-folder role, purple = workspace tool, teal = first-use step, green = do, red = avoid, cylinder = durable reference document. See [visuals/README.md](README.md#reading-these-diagrams) for the full shape vocabulary.
+
 ```mermaid
 flowchart TB
     classDef primary fill:#eff6ff,stroke:#2563eb,color:#111827,stroke-width:1.5px
@@ -12,7 +14,7 @@ flowchart TB
 
     subgraph folder_model["1. One folder, several roles"]
         direction LR
-        f1["1. Windows folder"] --> f2["2. Git repository"] --> f3["3. VS Code workspace"] --> f4["4. Project codebase"]
+        f1["Windows folder"] --> f2["Git repository"] --> f3["VS Code workspace"] --> f4["Project codebase"]
     end
     class f1,f2,f3,f4 primary
     style folder_model fill:#ffffff,stroke:#cbd5e1
@@ -21,11 +23,11 @@ flowchart TB
         direction TB
         subgraph vscode_first["Workspace tools"]
             direction LR
-            v1["1. Editor"] --> v2["2. Integrated terminal"] --> v3["3. Extensions"]
+            v1["Editor"] --> v2["Integrated terminal"] --> v3["Extensions"]
         end
         subgraph vscode_second["Project awareness"]
             direction LR
-            v4["4. Source control view"] --> v5["5. Python tooling"] --> v6["6. Copilot"]
+            v4["Source control view"] --> v5["Python tooling"] --> v6["Copilot"]
         end
         v3 --> v4
     end
@@ -38,11 +40,11 @@ flowchart TB
         direction TB
         subgraph first_use_first["Establish shared understanding"]
             direction LR
-            c1["1. Open the repository"] --> c2["2. Copilot reads bootstrap documents"] --> c3["3. Copilot restates its understanding"]
+            c1["Open the repository"] --> c2["Copilot reads bootstrap documents"] --> c3["Copilot restates its understanding"]
         end
         subgraph first_use_second["Make context durable"]
             direction LR
-            c4["4. Developer corrects and adds context"] --> c5["5. Project brief becomes durable"] --> c6["6. Only then begin implementation"]
+            c4["Developer corrects and adds context"] --> c5["Project brief becomes durable"] --> c6(["Only then begin implementation"])
         end
         c3 --> c4
     end
@@ -64,11 +66,11 @@ flowchart TB
         direction TB
         subgraph context_first["Project and setup"]
             direction LR
-            d1["docs/PROJECT_BRIEF.md<br/>what the project is"] --> d2["docs/BOOTSTRAP_STATE.md<br/>where setup stands"]
+            d1[("docs/PROJECT_BRIEF.md<br/>what the project is")] --> d2[("docs/BOOTSTRAP_STATE.md<br/>where setup stands")]
         end
         subgraph context_second["AI and repository rules"]
             direction LR
-            d3[".github/copilot-instructions.md<br/>how the AI should operate"] --> d4["README.md<br/>how the repository is used"]
+            d3[(".github/copilot-instructions.md<br/>how the AI should operate")] --> d4[("README.md<br/>how the repository is used")]
         end
         d2 --> d3
     end

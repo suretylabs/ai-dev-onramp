@@ -2,6 +2,8 @@
 
 This is the mental-model companion for GitHub identity, organization ownership, repositories, and lightweight protections.
 
+Diagram legend: blue = identity/sequence step, purple = sequence step, green = standing protection rule, teal = durable context, cylinder = durable owning/storing entity. See [visuals/README.md](README.md#reading-these-diagrams) for the full shape vocabulary.
+
 ```mermaid
 flowchart TB
     classDef primary fill:#eff6ff,stroke:#2563eb,color:#111827,stroke-width:1.5px
@@ -12,21 +14,22 @@ flowchart TB
     subgraph ownership["1. Identity and ownership"]
         direction LR
         account["Personal GitHub account<br/><br/>Authenticates the human developer.<br/>Holds verified email, recovery methods,<br/>2FA or passkeys, and the sign-in used by<br/>gh, VS Code, and Copilot."]
-        organization["Business GitHub organization<br/><br/>Owns repositories, controls access, and<br/>becomes the durable home for collaboration,<br/>future automation, and organization-managed<br/>Copilot policy."]
+        organization[("Business GitHub organization<br/><br/>Owns repositories, controls access, and<br/>becomes the durable home for collaboration,<br/>future automation, and organization-managed<br/>Copilot policy.")]
         account -->|"authenticates and operates"| organization
     end
-    class account,organization primary
+    class account primary
+    class organization context
     style ownership fill:#ffffff,stroke:#cbd5e1
 
     subgraph sequence["2. GitHub-first sequence"]
         direction TB
         subgraph sequence_first["Identity and remote"]
             direction LR
-            s1["1. Create account"] --> s2["2. Secure account"] --> s3["3. Create organization"]
+            s1["Create account"] --> s2["Secure account"] --> s3["Create organization"]
         end
         subgraph sequence_second["Repository and local connection"]
             direction LR
-            s4["4. Create private repository"] --> s5["5. Install local tools"] --> s6["6. Clone the known remote"]
+            s4["Create private repository"] --> s5["Install local tools"] --> s6["Clone the known remote"]
         end
         s3 --> s4
     end
@@ -57,15 +60,16 @@ flowchart TB
         direction TB
         subgraph github_role_first["Identity and collaboration"]
             direction LR
-            g1["1. Identity"] --> g2["2. Organization ownership"] --> g3["3. Collaboration"]
+            g1["Identity"] --> g2["Organization ownership"] --> g3["Collaboration"]
         end
         subgraph github_role_second["Durable context"]
             direction LR
-            g4["4. Copilot account context"] --> g5["5. Remote source of truth"] --> g6["6. Future automation and policy"]
+            g4["Copilot account context"] --> g5[("Remote source of truth")] --> g6["Future automation and policy"]
         end
         g3 --> g4
     end
-    class g1,g2,g3,g4,g5,g6 context
+    class g1,g2,g3,g4,g6 context
+    class g5 context
     style github_role fill:#ffffff,stroke:#cbd5e1
     style github_role_first fill:#ecfeff,stroke:#cbd5e1
     style github_role_second fill:#ecfeff,stroke:#cbd5e1
