@@ -54,7 +54,7 @@ flowchart TB
             direction LR
             v1["Code changes"] --> v2["Run formatting and lint"] --> v3["Run type checks"] --> v4["Run tests"]
         end
-        v4 --> v4g{"Tests pass?"}
+        v4 --> v4g{"All checks pass?"}
         v4g -->|"pass"| v6(["Commit"])
         v4g -->|"fail"| v5["Fix and rerun"]
         v5 --> v2
