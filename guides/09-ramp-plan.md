@@ -73,10 +73,10 @@ The developer can create, run, validate, commit, and reproduce a modern Python p
 - Add only the required integration library.
 - Build a read-only or safe sample path.
 - Convert external data into a typed Polars representation.
-- persist a Parquet artifact;
-- query or validate with DuckDB;
-- add tests around transformation logic;
-- use a branch and pull request.
+- Persist a Parquet artifact.
+- Query or validate with DuckDB.
+- Add tests around transformation logic.
+- Use a branch and pull request.
 
 ### Exit capability
 

@@ -13,7 +13,7 @@
 - Current status: not started / in progress / blocked / gate passed / paused
 - Last verified checkpoint:
 - Recommended next path:
-- the developer's selected path:
+- The developer's selected path:
 - Exact resume point:
 
 ## Phase gates
@@ -41,7 +41,7 @@
 - Consequence of Path B:
 - Path C, only when genuinely useful:
 - Recommendation and reason:
-- the developer's choice:
+- The developer's choice:
 
 ## Open choices and deferred work
 

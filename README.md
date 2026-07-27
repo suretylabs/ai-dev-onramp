@@ -25,10 +25,11 @@ This is the first on-ramp track. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ho
 
 ## Start here
 
-The material has three layers:
+The material has four layers:
 
 - [`guides/`](guides/) contains the procedural and instructional system.
 - [`visuals/`](visuals/) contains the mental-model companion.
+- [`templates/`](templates/) contains reusable state, decision, and instruction templates.
 - [`reference/`](reference/) contains per-stack technical standards, starting with the Python/uv track.
 
 For an AI-guided session, provide the LLM with:
