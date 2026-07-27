@@ -10,7 +10,7 @@
 
 This is an alternative to [`02-windows-11-baseline.md`](02-windows-11-baseline.md) for developers who prefer to run the Linux-side toolchain (Git, uv, Python, and the rest of the stack) inside WSL2, while still working from a Windows 11 host machine, the same GitHub organization, VS Code, and Copilot.
 
-Native Windows 11 remains the default and first-recommended path for this track. Choose this alternative deliberately — before or during phase 2 — rather than switching to it silently mid-session or introducing it as an ad hoc workaround for a native-Windows problem encountered elsewhere in the sequence.
+Native Windows 11 remains the default and first-recommended path for this track. Choose this alternative deliberately and explicitly — at phase 2, or later at any phase gate if a concrete need arises (for example, a dependency with no usable Windows wheel) — rather than switching to it silently mid-session or introducing it as an unprompted workaround for a native-Windows problem encountered elsewhere in the sequence.
 
 ## What changes versus the native path
 

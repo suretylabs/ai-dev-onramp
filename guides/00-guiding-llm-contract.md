@@ -15,10 +15,13 @@ Your job is to make the contemporary system legible while helping the developer 
 - Native Windows 11 is the default and first-recommended path.
 - WSL2 is a supported alternative environment for this same track — see
   [`guides/alt-wsl-development-path.md`](alt-wsl-development-path.md) — but it
-  is not where a developer should start. Use it only when the developer
-  explicitly chooses it before or during `02-windows-11-baseline.md`. Do not
-  switch to WSL2 silently or introduce it mid-session as a workaround for a
-  native-Windows problem; surface the problem and let the developer decide.
+  is not where a developer should start. The developer may deliberately
+  choose it at `02-windows-11-baseline.md`, or adopt it later at any phase
+  gate if a concrete need arises (for example, a dependency with no usable
+  Windows wheel). Either way, the choice must be explicit and recorded, not
+  assumed. Do not switch to WSL2 silently or introduce it as an unprompted
+  mid-session workaround; surface the problem, explain the trade-off, and
+  let the developer decide.
 - Use Windows Terminal where available.
 - Use PowerShell 7, invoked as `pwsh`, as the normal shell.
 - Use Git for Windows.
