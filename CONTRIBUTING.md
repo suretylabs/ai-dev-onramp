@@ -1,9 +1,9 @@
 # Contributing to AI Development On-Ramp
 
 Thanks for considering a contribution. This repository is a curated, AI-guided
-on-ramp: a **guide sequence**, a **visual companion**, and a set of
-**templates** — not an application codebase. Contributions are almost always
-Markdown and Mermaid, not code.
+on-ramp: a **guide sequence**, a **visual companion**, a set of
+**templates**, and per-stack **reference** material — not an application
+codebase. Contributions are almost always Markdown and Mermaid, not code.
 
 ## Before you start
 
@@ -24,13 +24,14 @@ Markdown and Mermaid, not code.
 | `README.md` | present | Entry point: target environment, guide sequence table, visual companion, governing principles, templates list. |
 | `LICENSE` | present | MIT license. |
 | `visuals/` | present | Mental-model companion. One Mermaid diagram per page, indexed by `visuals/README.md`. |
+| `reference/` | present | Per-stack technical reference content, starting with `reference/PYTHON_STYLEGUIDE.md` for the Python/uv track. On-ramp teaching material, not this repository's own coding standard. |
 | `guides/` | referenced, not yet authored | The procedural/instructional layer named in the README's guide sequence table (phases 0-9). This is open work — see [Before you start](#before-you-start). |
 | `templates/` | referenced, not yet authored | The reusable state/decision templates named in the README's Templates section (`BOOTSTRAP_STATE.md`, `DECISIONS.md`, `PROJECT_BRIEF.md`, and the two copilot-instructions templates). Also open work. |
 
 If you find a link in `README.md` that points somewhere that doesn't exist
-yet, it is very likely one of the two rows above rather than a broken link
-to quietly ignore — raise or claim it as its own issue instead of patching
-around it.
+yet, it is very likely one of the rows marked "referenced, not yet
+authored" above rather than a broken link to quietly ignore — raise or
+claim it as its own issue instead of patching around it.
 
 ## Content conventions
 
@@ -82,7 +83,11 @@ speculatively.
    Do not preemptively move today's `visuals/*.md` into
    `visuals/windows-python/` ahead of a second track existing — that move
    belongs in the same pull request that lands the second track, as one
-   coordinated rename instead of speculative churn.
+   coordinated rename instead of speculative churn. `reference/` is the
+   exception: its files are already self-namespaced by stack-specific
+   filenames (`PYTHON_STYLEGUIDE.md`), so a new stack adds its own sibling
+   file (for example `TYPESCRIPT_STYLEGUIDE.md`) instead of moving into a
+   `<track-slug>/` subdirectory.
 3. **Keep stack-agnostic material shared.** The governing principles, the
    guiding-LLM contract, and the `templates/` documents describe how to run
    the on-ramp process itself, not a specific stack. They stay at the top
