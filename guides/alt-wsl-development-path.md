@@ -8,9 +8,27 @@
 
 ## Scope
 
-This is an alternative to [`02-windows-11-baseline.md`](02-windows-11-baseline.md) for developers who prefer to run the Linux-side toolchain (Git, uv, Python, and the rest of the stack) inside WSL2, while still working from a Windows 11 host machine, the same GitHub organization, VS Code, and Copilot.
+This is a "level up" alternative to
+[`02-windows-11-baseline.md`](02-windows-11-baseline.md) for developers who
+are ready to run the Linux-side toolchain (Git, uv, Python, and the rest of
+the stack) inside WSL2, while still working from a Windows 11 host machine,
+the same GitHub organization, VS Code, and Copilot.
 
-Native Windows 11 remains the default and first-recommended path for this track. Choose this alternative deliberately and explicitly — at phase 2, or later at any phase gate if a concrete need arises (for example, a dependency with no usable Windows wheel) — rather than switching to it silently mid-session or introducing it as an unprompted workaround for a native-Windows problem encountered elsewhere in the sequence.
+WSL2 is a real, legitimate development environment — this page's existence
+is not a caution against it. It is a deliberate next step rather than the
+default for two practical reasons: it is not universally available (corporate
+policy, virtualization settings, or missing administrator rights can block
+it), and not every developer arriving from a Windows-only background is yet
+comfortable operating a Linux-side toolchain. Native Windows 11 remains the
+default and first-recommended path so the on-ramp works for everyone from
+day one; this stub is where a developer levels up to WSL2 once ready, or
+adopts it later for a concrete need (for example, a dependency with no
+usable Windows wheel).
+
+Choose this alternative deliberately and explicitly — at phase 2, or later
+at any phase gate — rather than switching to it silently mid-session or
+introducing it as an unprompted workaround for a native-Windows problem
+encountered elsewhere in the sequence.
 
 ## What changes versus the native path
 

@@ -21,7 +21,7 @@ Windows 11
 
 The default path is native Windows 11, chosen to avoid the cross-filesystem I/O performance penalty of editing and running project files across the Windows/Linux boundary. That default accepts a few trade-offs in return: `\` vs. `/` path-separator friction, CRLF vs. LF line endings (handled explicitly in [`guides/04-git-and-github-cli.md`](guides/04-git-and-github-cli.md#line-ending-conversion)), and the occasional Windows-native-wheel gap for a compiled Python package (checked in [`guides/06-python-314-and-uv.md`](guides/06-python-314-and-uv.md#verify-windows-wheel-availability)).
 
-WSL2 is an available alternative path for developers who prefer a Linux-side toolchain — see [`guides/alt-wsl-development-path.md`](guides/alt-wsl-development-path.md) — but it is not the first or recommended path for this track, and it is currently a stub awaiting content.
+WSL2 is a real, legitimate alternative for developers ready to level up their environment with a Linux-side toolchain — see [`guides/alt-wsl-development-path.md`](guides/alt-wsl-development-path.md). It is not the first or recommended path for this track, both because native Windows keeps the on-ramp usable for everyone from day one and because WSL2 is not universally available (corporate policy, virtualization settings, or missing administrator rights can block it) or already familiar to a Windows-only developer. It is currently a stub awaiting content.
 
 This is the first on-ramp track. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how additional tracks (other operating systems, languages, or data stacks) can be proposed.
 
