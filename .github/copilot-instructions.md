@@ -20,33 +20,37 @@ companion. Read the root [`README.md`](../README.md) and
   companion, governing principles, templates.
 - `visuals/` — implemented Mermaid mental-model companion (one `flowchart`
   per page, indexed by `visuals/README.md`).
+- `reference/` — per-stack technical reference content, starting with
+  `reference/PYTHON_STYLEGUIDE.md` for today's Python/uv track. This is
+  on-ramp teaching material, not this repository's own coding standard —
+  the repository itself ships no application code.
 - `guides/`, `templates/` — referenced by `README.md`'s guide-sequence table
   and Templates section but not yet authored. Treat these as open work, not
   broken links — see `CONTRIBUTING.md` before adding to them.
-- `PYTHON_STYLEGUIDE.md` — the Python coding standard for this repository,
-  applied once Python example code is added under a guide, workspace, or
-  elsewhere in the repo.
 - `CONTRIBUTING.md` — full repository layout, content conventions, and the
   convention for proposing a second tech-stack track alongside today's
   Windows + Python track.
 
 This repository currently has no application code, build step, or test
 suite of its own — it is documentation plus diagrams. The Python and
-testing sections below apply once Python content (example workspaces, guide
-snippets, tooling) is added.
+testing sections below apply only when Python example content is authored
+under `guides/` or `reference/`.
 
-## Python Standards
+## Python Example Content
 
-- Follow [`PYTHON_STYLEGUIDE.md`](../PYTHON_STYLEGUIDE.md) for all non-test
-  `.py` files: Google-style docstrings, type hints, `logging` over `print`,
-  import discipline, and the required manual review after any automated
+- When writing or editing Python snippets, examples, or a workspace under
+  `guides/` or `reference/`, follow
+  [`reference/PYTHON_STYLEGUIDE.md`](../reference/PYTHON_STYLEGUIDE.md):
+  Google-style docstrings, type hints, `logging` over `print`, import
+  discipline, and the required manual review after any automated
   Ruff/Pyright pass.
-- Use `uv` exclusively for Python dependency and environment management
-  (`uv add`, `uv sync`, `uv run python ...`). Do not install packages with
-  `pip` directly, and do not add a dependency without confirming it's
-  needed for the task at hand.
+- Use `uv` exclusively for any Python dependency and environment management
+  shown or scripted (`uv add`, `uv sync`, `uv run python ...`). Do not show
+  or use `pip` directly, and do not add a dependency without confirming
+  it's needed for the task at hand.
 - Target Python 3.14, matching the on-ramp's "Target environment" in
-  `README.md`.
+  `README.md`. If another stack track is later added, its own reference
+  document under `reference/` governs its examples instead.
 
 ## Documentation and Diagrams
 

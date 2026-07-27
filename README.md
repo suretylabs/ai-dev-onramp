@@ -23,10 +23,12 @@ The default path is native Windows 11. WSL is intentionally outside this on-ramp
 
 ## Start here
 
-The material has two layers:
+The material has three layers:
 
 - [`guides/`](guides/) contains the procedural and instructional system.
 - [`visuals/`](visuals/) contains the mental-model companion.
+- [`reference/`](reference/) contains per-stack technical standards, starting
+  with the Python/uv track.
 
 For an AI-guided session, provide the LLM with:
 
@@ -93,6 +95,18 @@ The visual layer explains:
 - [`PROJECT_BRIEF.md`](templates/PROJECT_BRIEF.md) — business process, first useful slice, data boundaries, and acceptance criteria
 - [`bootstrap-copilot-instructions.md`](templates/bootstrap-copilot-instructions.md) — minimal project-discovery behavior before implementation
 - [`copilot-instructions.template.md`](templates/copilot-instructions.template.md) — project-specific operating contract after discovery
+
+## Stack reference
+
+Each on-ramp track keeps its own technical standard under `reference/`, separate
+from this repository's own contributor conventions:
+
+- [`PYTHON_STYLEGUIDE.md`](reference/PYTHON_STYLEGUIDE.md) — the Python coding
+  standard for today's Python/uv track. This is on-ramp reference material,
+  not a claim that this repository ships a Python codebase of its own.
+
+Adding a track for a different language or runtime brings its own reference
+document alongside this one; see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Current-tooling rule
 
