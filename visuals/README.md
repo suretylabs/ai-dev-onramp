@@ -1,6 +1,6 @@
 # Visual Companion
 
-These diagrams support the procedural guides. They are not substitutes for observed output or the running state record.
+These Mermaid diagrams support the procedural guides. They are not substitutes for observed output or the running state record.
 
 1. [Meta flow](00-meta-flow.md)
 2. [GitHub foundation](01-github-foundation.md)
