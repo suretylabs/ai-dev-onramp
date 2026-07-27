@@ -47,8 +47,9 @@ flowchart TB
         direction TB
         subgraph validation_first["Quality checks"]
             direction LR
-            v1["1. Code changes"] --> v2["2. Run formatting and lint"] --> v3["3. Run type checks"] --> v4["4. Run tests"] --> v6["6. When all pass, commit"]
+            v1["1. Code changes"] --> v2["2. Run formatting and lint"] --> v3["3. Run type checks"] --> v4["4. Run tests"]
         end
+        v4 -->|"pass"| v6["6. When all pass, commit"]
         v4 -->|"failure"| v5["5. Fix and rerun"]
         v5 --> v2
     end
