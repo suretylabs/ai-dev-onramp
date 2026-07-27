@@ -23,15 +23,10 @@ codebase. Contributions are almost always Markdown and Mermaid, not code.
 |---|---|---|
 | `README.md` | present | Entry point: target environment, guide sequence table, visual companion, governing principles, templates list. |
 | `LICENSE` | present | MIT license. |
+| `guides/` | present | Procedural and instructional sequence for phases 0–9, indexed by `guides/README.md`. |
 | `visuals/` | present | Mental-model companion. One Mermaid diagram per page, indexed by `visuals/README.md`. |
+| `templates/` | present | Reusable bootstrap state, decision, project brief, and Copilot instruction templates, indexed by `templates/README.md`. |
 | `reference/` | present | Per-stack technical reference content, starting with `reference/PYTHON_STYLEGUIDE.md` for the Python/uv track. On-ramp teaching material, not this repository's own coding standard. |
-| `guides/` | referenced, not yet authored | The procedural/instructional layer named in the README's guide sequence table (phases 0-9). This is open work — see [Before you start](#before-you-start). |
-| `templates/` | referenced, not yet authored | The reusable state/decision templates named in the README's Templates section (`BOOTSTRAP_STATE.md`, `DECISIONS.md`, `PROJECT_BRIEF.md`, and the two copilot-instructions templates). Also open work. |
-
-If you find a link in `README.md` that points somewhere that doesn't exist
-yet, it is very likely one of the rows marked "referenced, not yet
-authored" above rather than a broken link to quietly ignore — raise or
-claim it as its own issue instead of patching around it.
 
 ## Content conventions
 
@@ -51,9 +46,14 @@ claim it as its own issue instead of patching around it.
   misparse the collision. Suffix ambiguous class names instead
   (`sequenceNode`, `remoteNode`, `shouldNode`, etc.), matching the pattern
   already used in `visuals/`.
-- **Keep the indexes in sync.** Any time a visual or guide page is added,
-  renamed, or removed, update `visuals/README.md` and the relevant table(s)
-  in the root `README.md` in the same pull request.
+- **Keep the indexes in sync.** Any time a visual, guide, template, or
+  reference page is added, renamed, or removed, update its directory index
+  and the relevant table or list in the root `README.md` in the same pull
+  request.
+- **Keep reusable and personal content separate.** Public guides and
+  templates must not include names, private repository content, credentials,
+  production data, or learner-specific state. Personal overlays should link
+  back to this repository rather than duplicating the canonical guides.
 
 ## Extending to another tech stack
 
@@ -80,14 +80,13 @@ speculatively.
    visuals/<track-slug>/NN-topic.md
    ```
 
-   Do not preemptively move today's `visuals/*.md` into
-   `visuals/windows-python/` ahead of a second track existing — that move
+   Do not preemptively move today's `guides/*.md` or `visuals/*.md` into a
+   `windows-python/` subtree ahead of a second track existing. That move
    belongs in the same pull request that lands the second track, as one
    coordinated rename instead of speculative churn. `reference/` is the
    exception: its files are already self-namespaced by stack-specific
    filenames (`PYTHON_STYLEGUIDE.md`), so a new stack adds its own sibling
-   file (for example `TYPESCRIPT_STYLEGUIDE.md`) instead of moving into a
-   `<track-slug>/` subdirectory.
+   file (for example `TYPESCRIPT_STYLEGUIDE.md`).
 3. **Keep stack-agnostic material shared.** The governing principles, the
    guiding-LLM contract, and the `templates/` documents describe how to run
    the on-ramp process itself, not a specific stack. They stay at the top
@@ -102,9 +101,10 @@ speculatively.
 
 - Branch names should describe the change (for example `docs/<short-topic>`
   or `fix/<short-topic>`). External contributors should fork.
-- Describe how you validated the change (for example, "previewed the
-  Mermaid diagram in GitHub's PR view"), since this repository has no build
-  or test step to run.
+- Describe how you validated the change: review Markdown rendering, internal
+  links, terminology, current-tooling claims, and any Mermaid affected by
+  the pull request. This repository does not currently have an application
+  build or test suite of its own.
 - Maintainers review and decide when to merge; opening a pull request does
   not merge it.
 
