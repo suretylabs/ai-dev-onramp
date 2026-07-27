@@ -142,6 +142,20 @@ Choose only when requirements are known:
 
 Do not add both `pypdf` and `pdfplumber` merely because PDFs are in scope. Select based on the first use case.
 
+## Verify Windows wheel availability
+
+Some Python packages — particularly scientific, ML, or C-extension-backed libraries — do not publish a prebuilt Windows wheel for every release, or require a native C/C++ toolchain to build from source. This is a real, occasional friction point for native Windows development that most Linux/macOS-oriented tutorials never mention.
+
+Before running `uv add <package>`:
+
+1. Check the package's PyPI "Download files" page for a `win_amd64` wheel matching the target Python version, or note that it ships as pure-Python (`py3-none-any`) and is platform-independent.
+2. Run `uv add <package>` and read the resolver output. If uv reports building from a source distribution rather than installing a wheel, a compiler toolchain may be invoked; treat this as evidence to record, not silently accept.
+
+If a dependency has no Windows wheel and no practical build path:
+
+- look for a maintained alternative package or a pure-Python fallback first;
+- if neither exists, surface the gap explicitly to the developer rather than working around it silently — this is exactly the kind of situation in which choosing the [WSL2 alternative path](alt-wsl-development-path.md) for that part of the work is a legitimate, deliberate decision, not a default.
+
 ## Compatibility evidence
 
 For every dependency group:

@@ -19,7 +19,9 @@ Windows 11
   -> Ruff + Pyright + pytest
 ```
 
-The default path is native Windows 11. WSL is intentionally outside this on-ramp.
+The default path is native Windows 11, chosen to avoid the cross-filesystem I/O performance penalty of editing and running project files across the Windows/Linux boundary. That default accepts a few trade-offs in return: `\` vs. `/` path-separator friction, CRLF vs. LF line endings (handled explicitly in [`guides/04-git-and-github-cli.md`](guides/04-git-and-github-cli.md#line-ending-conversion)), and the occasional Windows-native-wheel gap for a compiled Python package (checked in [`guides/06-python-314-and-uv.md`](guides/06-python-314-and-uv.md#verify-windows-wheel-availability)).
+
+WSL2 is an available alternative path for developers who prefer a Linux-side toolchain — see [`guides/alt-wsl-development-path.md`](guides/alt-wsl-development-path.md) — but it is not the first or recommended path for this track, and it is currently a stub awaiting content.
 
 This is the first on-ramp track. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how additional tracks (other operating systems, languages, or data stacks) can be proposed.
 

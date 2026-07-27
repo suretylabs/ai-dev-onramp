@@ -15,6 +15,16 @@ These guides are the step-by-step operating layer for the first AI Development O
 | 8 | [Daily engineering loop](08-daily-engineering-loop.md) | Inspect, change, validate, commit, push, and state handoff are routine. |
 | 9 | [Ramp plan](09-ramp-plan.md) | Capability gates lead to a useful business result rather than calendar completion. |
 
+## Alternative paths
+
+These are not part of the default numbered sequence. They document a
+deliberate variant of one phase for developers who want it, without
+disturbing the default path or its phase numbering.
+
+| Phase variant | Guide | Default? | Status |
+|---|---|---|---|
+| 2 — Windows 11 baseline, WSL2 variant | [WSL2 development path](alt-wsl-development-path.md) | No — native Windows 11 (`02-windows-11-baseline.md`) is the default and first-recommended path | stub — not yet authored |
+
 ## Operating rule
 
 The unit of progress is a verified state transition, not a command sent or a page read.
