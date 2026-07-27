@@ -25,12 +25,12 @@ This is the first on-ramp track. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ho
 
 ## Start here
 
-The material has three layers:
+The material has four layers:
 
 - [`guides/`](guides/) contains the procedural and instructional system.
 - [`visuals/`](visuals/) contains the mental-model companion.
-- [`reference/`](reference/) contains per-stack technical standards, starting
-  with the Python/uv track.
+- [`templates/`](templates/) contains reusable state, decision, and instruction templates.
+- [`reference/`](reference/) contains per-stack technical standards, starting with the Python/uv track.
 
 For an AI-guided session, provide the LLM with:
 
@@ -123,7 +123,7 @@ Primary references:
 
 ## Status
 
-This repository is an initial public release candidate. The intended validation path is:
+The procedural guides, reusable templates, visual companion, and Python reference layer are now authored. This repository remains an initial public release candidate. The intended validation path is:
 
 ```text
 Repository review
