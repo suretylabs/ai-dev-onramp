@@ -136,11 +136,53 @@ Do not install the entire eventual stack in one command. Add packages when their
 
 Choose only when requirements are known:
 
-- MSSQL client library and required Windows/native prerequisites;
+- MSSQL client library — prefer `mssql-python` (see below);
 - PDF parser appropriate to text extraction, layout extraction, table extraction, or rendering;
 - `python-dotenv` if local environment-file loading is part of the design.
 
 Do not add both `pypdf` and `pdfplumber` merely because PDFs are in scope. Select based on the first use case.
+
+### MSSQL client library: prefer `mssql-python`
+
+Use `mssql-python` for new MSSQL connectivity work:
+
+```text
+uv add mssql-python
+```
+
+`mssql-python` is Microsoft's own actively maintained DB-API 2.0 driver for
+SQL Server, Azure SQL Database, Azure SQL Managed Instance, and Microsoft
+Fabric databases. Prefer it over `pyodbc` or `pymssql` because it bundles its
+native connectivity components directly in the wheel — there is no separate
+Microsoft ODBC Driver for SQL Server to install and no system driver manager
+to configure on Windows. It supports SQL login, Windows-integrated, and
+Entra ID (Azure AD) authentication.
+
+```python
+import os
+
+import mssql_python
+
+conn = mssql_python.connect(
+    f"SERVER={os.environ['MSSQL_SERVER']};"
+    f"DATABASE={os.environ['MSSQL_DATABASE']};"
+    f"UID={os.environ['MSSQL_USER']};"
+    f"PWD={os.environ['MSSQL_PASSWORD']};"
+    "Encrypt=yes;"
+)
+cursor = conn.cursor()
+cursor.execute("SELECT @@VERSION")
+print(cursor.fetchone())
+cursor.close()
+conn.close()
+```
+
+Read the server, database, user, and password from environment variables (via `.env`/`python-dotenv`) rather than hardcoding them, consistent with the credential handling described in `guides/07-first-integrated-workspace.md` and the generated Copilot instructions.
+
+Only choose `pyodbc` (or another library) instead when a project has an
+existing, concrete dependency on it — for example an established codebase
+already built around it, or a connectivity requirement `mssql-python` does
+not yet cover. Record the reason in `docs/DECISIONS.md` when that happens.
 
 ## Verify Windows wheel availability
 

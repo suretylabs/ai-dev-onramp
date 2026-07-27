@@ -60,7 +60,7 @@ Define the smallest result that has real value.
 - Polars
 - Parquet
 - DuckDB
-- MSSQL integration, if required
+- MSSQL integration, if required (`mssql-python`)
 - PDF integration, if required
 - Ruff
 - Pyright
