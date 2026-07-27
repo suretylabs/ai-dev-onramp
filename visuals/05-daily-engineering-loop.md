@@ -57,7 +57,7 @@ flowchart TB
         v4 --> v4g{"All checks pass?"}
         v4g -->|"pass"| v6(["Commit"])
         v4g -->|"fail"| v5["Fix and rerun"]
-        v5 --> v2
+        v5 -.-> v2
     end
     class v1,v2,v3,v4,v5 validation
     class v4g gate
