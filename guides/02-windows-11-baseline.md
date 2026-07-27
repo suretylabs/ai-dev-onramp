@@ -2,6 +2,8 @@
 
 > Companion: [Local toolchain visual](../visuals/02-local-toolchain.md)
 
+> Prefer a Linux-side toolchain on the same Windows 11 host instead? See the [WSL2 alternative path](alt-wsl-development-path.md) — currently a stub — before continuing. Native Windows 11 below remains the default and first-recommended path for this track.
+
 ## Outcome
 
 Establish a native Windows development baseline with:
@@ -61,6 +63,59 @@ The guiding LLM should:
 5. make PowerShell 7 the preferred Windows Terminal profile if the developer agrees.
 
 Do not permanently relax the machine execution policy merely to make ordinary development easier. Use process-scoped or command-scoped exceptions only when an official installer requires them, and explain the scope.
+
+## Bash-to-PowerShell equivalents
+
+Most Python and general open-source documentation defaults to Bash syntax. PowerShell 7 is not Bash, so translate rather than paste. Verify uncertain cases with `Get-Help <cmdlet> -Full` rather than assuming.
+
+### Environment variables
+
+| Bash | PowerShell 7 |
+|---|---|
+| `export VAR=value` | `$env:VAR = "value"` |
+| `echo $VAR` | `$env:VAR` |
+| `unset VAR` | `Remove-Item Env:VAR` |
+| `env` | `Get-ChildItem Env:` |
+
+### Files and directories
+
+| Bash | PowerShell 7 |
+|---|---|
+| `ls -la` | `Get-ChildItem -Force` |
+| `cat file` | `Get-Content file` |
+| `rm -rf dir` | `Remove-Item -Recurse -Force dir` |
+| `mkdir -p a/b/c` | `New-Item -ItemType Directory -Path a/b/c` (nested directories are created automatically; add `-Force` only to suppress an "already exists" error) |
+| `cp -r src dst` | `Copy-Item -Recurse src dst` |
+| `mv src dst` | `Move-Item src dst` |
+| `touch file` | `New-Item -ItemType File -Path file` |
+| `pwd` | `Get-Location` (`pwd` also works as a built-in alias) |
+
+### Search and inspection
+
+| Bash | PowerShell 7 |
+|---|---|
+| `grep pattern file` | `Select-String -Pattern pattern -Path file` |
+| `which cmd` | `Get-Command cmd` (add `.Source` for just the path) |
+| `head -n 20 file` | `Get-Content file -TotalCount 20` |
+| `tail -n 20 file` | `Get-Content file -Tail 20` |
+| `wc -l file` | `(Get-Content file).Count` |
+
+### Python virtual environments
+
+| Bash | PowerShell 7 |
+|---|---|
+| `source .venv/bin/activate` | `.venv\Scripts\Activate.ps1` |
+
+### Elevation
+
+Bash's `sudo cmd` has no direct PowerShell equivalent on Windows 11. Open a new terminal with "Run as administrator" instead. Some current Windows 11 builds expose an experimental `sudo` command (Settings > For developers); do not depend on it being present until it is confirmed on the developer's build.
+
+### Things that behave differently, not just differently-named
+
+- **Command chaining.** PowerShell 7 supports `&&` and `||` between simple commands, similar to Bash, but they cannot directly follow a block-based keyword (`if`, `foreach`, `while`) or a variable assignment. Use `;` for plain unconditional sequencing when in doubt.
+- **Pipes carry objects, not text.** `Get-ChildItem | Select-String pattern` behaves differently from a same-shaped Bash pipeline because PowerShell passes structured objects between commands, not raw text lines. Adapting a Bash one-liner that parses text output often needs a different approach entirely, not just a syntax swap.
+- **Exit codes and errors.** A failing native/external command does not stop a script the way Bash's `set -e` does. Cmdlet error behavior is controlled by `$ErrorActionPreference`; a failing external command's status is available via `$LASTEXITCODE` and must be checked explicitly if the script should stop on failure.
+- **Quoting.** Double quotes interpolate variables and single quotes do not, similar to Bash, but escaping rules for special characters differ. Verify quoting behavior with a short local test rather than assuming Bash-style escaping.
 
 ## Development directory
 
