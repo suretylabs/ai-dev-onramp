@@ -21,6 +21,8 @@ Windows 11
 
 The default path is native Windows 11. WSL is intentionally outside this on-ramp.
 
+This is the first on-ramp track. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how additional tracks (other operating systems, languages, or data stacks) can be proposed.
+
 ## Start here
 
 The material has two layers:
@@ -115,6 +117,12 @@ Repository review
     -> observed-friction revisions
     -> stable v1.0
 ```
+
+## Contributing
+
+Contributions are welcome — see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
+repository layout, content conventions, and how to propose a new tech-stack
+track.
 
 ## License
 
