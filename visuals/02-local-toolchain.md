@@ -2,6 +2,8 @@
 
 This is the mental-model companion for the Windows workstation, local tooling, and the Git round trip.
 
+Diagram legend: blue = local-stack step, purple = round-trip step, teal/cylinder = durable remote store, amber stadium = tracked Git state, gray = explanatory note. See [visuals/README.md](README.md#reading-these-diagrams) for the full shape vocabulary.
+
 ```mermaid
 flowchart TB
     classDef primary fill:#eff6ff,stroke:#2563eb,color:#111827,stroke-width:1.5px
@@ -14,11 +16,11 @@ flowchart TB
         direction TB
         subgraph local_stack_first["Operating system and tools"]
             direction LR
-            l1["1. Windows 11"] --> l2["2. PowerShell 7"] --> l3["3. Git for Windows"] --> l4["4. GitHub CLI (gh)"]
+            l1["Windows 11"] --> l2["PowerShell 7"] --> l3["Git for Windows"] --> l4["GitHub CLI (gh)"]
         end
         subgraph local_stack_second["Workspace and runtime"]
             direction LR
-            l5["5. VS Code"] --> l6["6. uv"] --> l7["7. Python 3.14"]
+            l5["VS Code"] --> l6["uv"] --> l7["Python 3.14"]
         end
         l4 --> l5
     end
@@ -37,7 +39,7 @@ flowchart TB
     subgraph local_remote["3. Local versus remote"]
         direction LR
         local["Local machine<br/><br/>PowerShell<br/>VS Code<br/>Local repository<br/>Local files and project environment"]
-        remote["Remote GitHub<br/><br/>Organization repository<br/>Canonical history<br/>Collaboration surface<br/>Copilot account context"]
+        remote[("Remote GitHub<br/><br/>Organization repository<br/>Canonical history<br/>Collaboration surface<br/>Copilot account context")]
         local -. "syncs with" .-> remote
     end
     class local note
@@ -48,11 +50,11 @@ flowchart TB
         direction TB
         subgraph round_trip_first["Local history"]
             direction LR
-            r1["1. Edit a file locally"] --> r2["2. Inspect with git status"] --> r3["3. Stage with git add"]
+            r1["Edit a file locally"] --> r2["Inspect with git status"] --> r3["Stage with git add"]
         end
         subgraph round_trip_second["Shared history"]
             direction LR
-            r4["4. Create a local commit"] --> r5["5. Push to GitHub"] --> r6["6. Verify the same commit remotely"]
+            r4["Create a local commit"] --> r5["Push to GitHub"] --> r6["Verify the same commit remotely"]
         end
         r3 --> r4
     end
@@ -63,7 +65,7 @@ flowchart TB
 
     subgraph git_state["5. Meaning of Git state"]
         direction LR
-        st1["1. Untracked"] --> st2["2. Tracked and staged"] --> st3["3. Committed locally"] --> st4["4. Pushed remotely"]
+        st1(["Untracked"]) --> st2(["Tracked and staged"]) --> st3(["Committed locally"]) --> st4(["Pushed remotely"])
     end
     class st1,st2,st3,st4 state
     style git_state fill:#ffffff,stroke:#cbd5e1
