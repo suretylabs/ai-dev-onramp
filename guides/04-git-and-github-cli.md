@@ -74,6 +74,16 @@ Explain three distinct layers:
 
 For modern Python and potentially cross-platform execution, prefer repository-owned line-ending policy over opaque global conversion. Do not create a surprising machine-wide rule without explaining it.
 
+A minimal `.gitattributes` that normalizes text to LF in the repository while leaving Windows-only scripts alone:
+
+```gitattributes
+* text=auto eol=lf
+
+*.ps1 text eol=crlf
+```
+
+Commit this file once, near the start of a project, rather than relying on each developer's global `core.autocrlf` setting to agree.
+
 ### Terminal behavior
 
 The primary shell is PowerShell 7 in Windows Terminal. If the Git installer asks how Git Bash should host its terminal, explain that the choice affects Git Bash behavior, not the normal shell for this guide.

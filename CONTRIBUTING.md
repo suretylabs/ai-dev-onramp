@@ -97,6 +97,15 @@ speculatively.
    a short list of tracks, each linking to its own guide-sequence table and
    visual companion — not before.
 
+This mechanism is for a genuinely separate track — a different OS,
+language/runtime, or data stack. It does not apply to an alternative
+execution environment for the *same* stack, such as running today's
+Windows-hosted track's tools inside WSL2. That kind of in-track variant is
+lighter-weight: a single non-numbered stub guide (for example
+[`guides/alt-wsl-development-path.md`](guides/alt-wsl-development-path.md))
+plus an "Alternative paths" entry in `guides/README.md`, with no new
+namespace and no change to the existing numbered sequence.
+
 ## Pull requests
 
 - Branch names should describe the change (for example `docs/<short-topic>`
