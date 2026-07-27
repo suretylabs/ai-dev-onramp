@@ -159,10 +159,16 @@ to configure on Windows. It supports SQL login, Windows-integrated, and
 Entra ID (Azure AD) authentication.
 
 ```python
+import os
+
 import mssql_python
 
 conn = mssql_python.connect(
-    "SERVER=<server>;DATABASE=<database>;UID=<user>;PWD=<password>;Encrypt=yes;"
+    f"SERVER={os.environ['MSSQL_SERVER']};"
+    f"DATABASE={os.environ['MSSQL_DATABASE']};"
+    f"UID={os.environ['MSSQL_USER']};"
+    f"PWD={os.environ['MSSQL_PASSWORD']};"
+    "Encrypt=yes;"
 )
 cursor = conn.cursor()
 cursor.execute("SELECT @@VERSION")
@@ -170,6 +176,8 @@ print(cursor.fetchone())
 cursor.close()
 conn.close()
 ```
+
+Read the server, database, user, and password from environment variables (via `.env`/`python-dotenv`) rather than hardcoding them, consistent with the credential handling described in `guides/07-first-integrated-workspace.md` and the generated Copilot instructions.
 
 Only choose `pyodbc` (or another library) instead when a project has an
 existing, concrete dependency on it — for example an established codebase
