@@ -160,7 +160,7 @@ Use a coherent commit message. Verify a clean working tree and remote visibility
 After the local vertical slice is stable:
 
 1. Clarify authentication: Windows integrated, SQL login, Azure identity, or another approved method.
-2. Identify the current supported Python library and Windows prerequisites.
+2. Use `mssql-python` (`guides/06-python-314-and-uv.md`) unless the project has an existing, recorded reason to use a different library; confirm the current supported version and any prerequisites.
 3. Use a read-only account.
 4. Put secret names in `.env.example`, actual values in ignored `.env` or approved secret storage.
 5. Begin with a metadata or small bounded query.

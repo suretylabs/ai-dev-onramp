@@ -42,6 +42,7 @@ Before changing code:
 - Prefer functions for stateless transformations and classes when state/lifecycle warrants them.
 - Use Polars as the default DataFrame engine.
 - Use DuckDB for local analytical SQL and direct Parquet queries.
+- Use `mssql-python` for MSSQL connectivity unless `docs/DECISIONS.md` records an approved reason to use another library.
 - Treat Parquet as a typed columnar artifact, not as a database server.
 - Keep extraction, transformation, persistence, and query concerns testable independently.
 - Do not add dependencies without explaining the missing capability and confirming Python 3.14 support.
