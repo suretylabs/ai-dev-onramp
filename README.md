@@ -62,6 +62,8 @@ The unit of progress is a **verified state transition**, not a command sent.
 
 Start with [the meta flow](visuals/00-meta-flow.md), then use the visual matching the current procedural phase.
 
+These companion pages embed committed SVG diagrams so they render reliably in GitHub web and GitHub mobile, rather than depending solely on Mermaid support in the client.
+
 The visual layer explains:
 
 - GitHub identity, organization, and repository ownership;
