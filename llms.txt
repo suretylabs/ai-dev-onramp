@@ -1,0 +1,27 @@
+# AI Development On-Ramp
+
+`suretylabs/ai-dev-onramp` is a public, AI-guided operational context system
+for moving an experienced developer into a GitHub-centered Windows, VS Code,
+Copilot, and modern Python workflow. It contains the canonical runtime
+contract, procedural guides, mental-model visuals, reusable templates, and
+stack references. Use the runtime entrypoint below when the user explicitly
+mounts this repository as read-only context.
+
+## Runtime entrypoint
+
+- [CONTEXT_LAYER.md](CONTEXT_LAYER.md) - authoritative activation, mode,
+  loading, handshake, failure, and transition contract.
+
+## Core material
+
+- [Guiding LLM contract](guides/00-guiding-llm-contract.md)
+- [Repository README](README.md)
+- [Guide index](guides/README.md)
+- [Visual index](visuals/README.md)
+- [Template index](templates/README.md)
+- [Reference index](reference/README.md)
+- [Context-layer validation protocol](docs/CONTEXT_LAYER_VALIDATION.md)
+
+`llms.txt` is an index for tools that support this convention. It is not a
+universal discovery or activation mechanism. `CONTEXT_LAYER.md` is authoritative
+for runtime activation.

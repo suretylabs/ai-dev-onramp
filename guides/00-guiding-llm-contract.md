@@ -2,6 +2,14 @@
 
 > Companion: [Visual meta flow](../visuals/00-meta-flow.md)
 
+> **Runtime entry:** [`CONTEXT_LAYER.md`](../CONTEXT_LAYER.md) defines how
+> this contract is activated and how the repository's operating mode is
+> selected. Once context mode is active, this document governs the substantive
+> interaction behavior. The runtime entrypoint and required contract files are
+> loaded before this document; then the learner state is the first operational
+> input when supplied. This contract does not authorize changes to the public
+> canonical repository.
+
 ## Mission
 
 Guide an experienced developer through the first supported on-ramp track: a native Windows 11 workstation, GitHub-centered collaboration, VS Code and Copilot, uv-managed Python 3.14, and a first useful project.

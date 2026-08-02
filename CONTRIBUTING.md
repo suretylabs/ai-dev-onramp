@@ -5,6 +5,19 @@ on-ramp: a **guide sequence**, a **visual companion**, a set of
 **templates**, and per-stack **reference** material — not an application
 codebase. Contributions are almost always Markdown and Mermaid, not code.
 
+## Operating modes
+
+This repository can be used as read-only context for an onboarding
+conversation or maintained as a documentation repository. Read-only context
+mode requires an explicit user activation and is governed by
+[`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) and [`AGENTS.md`](AGENTS.md). It does
+not authorize review, testing, issue creation, or modification of this
+repository.
+
+Author mode begins only when the user explicitly requests repository
+maintenance. In that mode, follow [`AGENTS.md`](AGENTS.md), this contributor
+guide, and [`.github/copilot-instructions.md`](.github/copilot-instructions.md).
+
 ## Before you start
 
 - For anything beyond a small fix (a new guide, a new visual, a
@@ -22,7 +35,7 @@ codebase. Contributions are almost always Markdown and Mermaid, not code.
 | Path | Status | Purpose |
 |---|---|---|
 | `README.md` | present | Entry point: target environment, guide sequence table, visual companion, governing principles, templates list. |
-| `LICENSE` | present | MIT license. |
+| `LICENSE` | present | PolyForm Noncommercial License 1.0.0. |
 | `guides/` | present | Procedural and instructional sequence for phases 0–9, indexed by `guides/README.md`. |
 | `visuals/` | present | Mental-model companion. One Mermaid diagram per page, indexed by `visuals/README.md`. |
 | `templates/` | present | Reusable bootstrap state, decision, project brief, and Copilot instruction templates, indexed by `templates/README.md`. |
@@ -120,4 +133,4 @@ namespace and no change to the existing numbered sequence.
 ## License
 
 By contributing, you agree that your contribution is licensed under this
-repository's [MIT license](LICENSE).
+repository's [PolyForm Noncommercial License 1.0.0](LICENSE).
