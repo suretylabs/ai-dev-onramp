@@ -62,6 +62,9 @@ that it remembers the repository.
 
 ## Required handshake checks
 
+Before checking the response shape, confirm that `CONTEXT_LAYER.md`, the
+guiding contract, and `README.md` were actually retrieved at the same ref.
+
 For a successful explicit activation, confirm that the first response contains:
 
 ```text

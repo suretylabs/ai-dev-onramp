@@ -91,6 +91,7 @@ Before returning the first response after activation, confirm:
 
 - this entrypoint was retrieved;
 - the guiding contract was retrieved;
+- `README.md` was retrieved and validated;
 - the repository identity and actual ref are known;
 - learner state is accurately classified as `loaded`, `not supplied`, or
   `unavailable`;
@@ -119,9 +120,9 @@ Do not add a success-shaped handshake when a required file is missing.
 ## Failure behavior
 
 Activation fails closed when the repository, this entrypoint, the guiding
-contract, or a supplied required ref cannot be accessed or is ambiguous. It
-also fails closed when the user requires learner state to resume but the state
-document is missing or inaccessible.
+contract, `README.md`, or a supplied required ref cannot be accessed or is
+ambiguous. It also fails closed when the user requires learner state to resume
+but the state document is missing or inaccessible.
 
 Report the exact missing or invalid dependency and ask only for the smallest
 corrective action. For example:
@@ -160,13 +161,15 @@ or uncommitted changes into a read-only onboarding session.
 When instructions conflict, apply this order:
 
 1. System, developer, and safety instructions.
-2. The user's explicit mode and scope instruction for the current session.
+2. The user's explicit mode transition for the current session (`author` or
+   `context`).
 3. This runtime contract.
 4. The guiding contract and other loaded repository material.
 
 An explicit author-mode request is the required transition out of read-only
 context mode; an ordinary request to change the public context repository is
-not an implicit transition.
+not an implicit transition. A task request is interpreted within the selected
+mode and cannot replace that transition.
 
 ## Private activation boundary
 

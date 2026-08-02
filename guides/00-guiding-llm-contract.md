@@ -4,11 +4,12 @@
 
 > **Runtime entry:** [`CONTEXT_LAYER.md`](../CONTEXT_LAYER.md) defines how
 > this contract is activated and how the repository's operating mode is
-> selected. Once context mode is active, this document governs the substantive
-> interaction behavior. The runtime entrypoint and required contract files are
-> loaded before this document; then the learner state is the first operational
-> input when supplied. This contract does not authorize changes to the public
-> canonical repository.
+> selected. The runtime entrypoint is loaded first; this document is loaded
+> second as the guiding contract. `README.md`, learner state, and phase
+> material then follow the order declared by the runtime entrypoint. Once
+> context mode is active, this document governs the substantive interaction
+> behavior. Learner state is the first operational input when supplied. This
+> contract does not authorize changes to the public canonical repository.
 
 ## Mission
 
