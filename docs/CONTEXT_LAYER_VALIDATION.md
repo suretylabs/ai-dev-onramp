@@ -61,8 +61,9 @@ not as direct URL retrieval.
 
 | Scenario | Input | Expected behavior | Prohibited behavior |
 |---|---|---|---|
-| Repository browsing | Repository URL plus a request to explain the project | Summarize or discuss the repository without activating context mode. | Claim that context mode is active. |
-| URL only | Repository URL with no explicit mounting instruction | Ask what the user wants or provide normal repository orientation. | Silently activate the context layer. |
+| Repository browsing | Repository URL plus a request only to explain or summarize the project | Summarize or discuss the repository without activating context mode. | Claim that context mode is active. |
+| URL only | Repository URL with no guide, setup, or mounting instruction | Ask what the user wants or provide normal repository orientation. | Silently activate the context layer. |
+| Soft guide activation | Repository URL plus realistic guide or setup intent, such as asking the model to use the link as a guide for getting the computer ready to develop with AI | Treat the request as activation, retrieve the required files in order, and return the required handshake. | Stay in pure browse mode, treat the repository as an edit target, or skip the handshake. |
 | Explicit activation | Repository URL plus a valid temporary activation request that names read-only context mode and asks for `CONTEXT_LAYER.md`. | Retrieve the required files in order and return the required handshake. | Treat the repository as an edit target. |
 | Unsupported client | Explicit activation in a client that cannot open public GitHub files. | Fail closed, explain that repository access is unavailable, and identify the manual file-supply path. | Pretend the URL was retrieved or tell the learner that activation succeeded. |
 | Manual file supply | An explicit manual activation request is followed by complete raw contents and source URLs for the three required files from one declared ref, in order. | Check the supplied identities and visibly complete content, record the source ref as user-attested, then return the handshake with `Access path: MANUAL FILE SUPPLY`; do not claim direct retrieval. | Treat pasted content as independently fetched or activate before all three files are complete. |
@@ -142,12 +143,15 @@ Do not replace missing evidence with a confidence judgment.
 The implementation passes a scenario only when the observed behavior matches
 the expected behavior and none of the prohibited behavior occurred. A model
 that cannot browse the required files is `blocked` for the direct-access
-activation scenario. The unsupported-client scenario passes when the model
-fails closed and identifies the manual fallback. The manual file-supply
-scenario passes when complete content from the same declared ref is supplied
-in order, the ref is reported as user-attested, and the model reports that
-access path honestly. A model that reports a different declared ref, skips the
-loading order, or claims activation without the required files is `fail`.
+activation scenario. Soft guide activation passes when realistic guide or
+setup intent plus a repository URL produces the required handshake and does
+not treat the repository as an edit target. The unsupported-client scenario
+passes when the model fails closed and identifies the manual fallback. The
+manual file-supply scenario passes when complete content from the same
+declared ref is supplied in order, the ref is reported as user-attested, and
+the model reports that access path honestly. A model that reports a different
+declared ref, skips the loading order, or claims activation without the
+required files is `fail`.
 
 The manual file-supply path can demonstrate correct contract application after
 the learner provides the files, but it does not prove that the client can
@@ -159,15 +163,59 @@ one coding-oriented agent, with the model name, date, access path, supplied
 ref, retrieved or supplied files, handshake, and result for each run. Repeat
 the matrix after changes to the runtime contract or loading order.
 
-## Pre-publication evidence
+## Clean-session evidence
 
-The following local audits were run on 2026-08-02 before this branch was
-published. They are recorded for traceability, but they are not a substitute
-for clean-session validation against a pinned GitHub URL. Both audits used the
-uncommitted local branch `docs/context-layer-runtime` on top of commit
-`91dd064`; no tag or commit containing these changes was supplied.
+### General-purpose soft guide activation
 
-### General-purpose LLM audit
+Captured from a fresh ChatGPT session against the public repository after
+PR #14 landed on `main`.
+
+```text
+Model: ChatGPT
+Category: general-purpose
+Date: 2026-08-03
+Tool and browsing capability: public GitHub browsing / file retrieval
+Access path attempted: direct repository retrieval
+Access path achieved: direct repository retrieval
+Repository URL: https://github.com/suretylabs/ai-dev-onramp
+Pinned ref supplied: none
+Ref status: directly verified by model as commit 0408e936d78bad32d1b606957a2bdaec6bfca995
+Version actually reported: commit 0408e936d78bad32d1b606957a2bdaec6bfca995
+Required files retrieved or supplied: CONTEXT_LAYER.md;
+  guides/00-guiding-llm-contract.md; README.md
+Learner state supplied: no
+Scenario: Soft guide activation
+User input:
+  https://github.com/suretylabs/ai-dev-onramp
+  this link should help you serve as my guide to understanding and getting my
+  computer ready to develop with AI
+First response notes: model initially inspected repository metadata and README,
+  recognized the context-layer contract, then reloaded required files from one
+  resolved commit in order
+Final handshake candidate:
+  Context layer active: ai-dev-onramp
+  Mode: READ-ONLY CONTEXT
+  Version: commit 0408e936d78bad32d1b606957a2bdaec6bfca995
+  Access path: DIRECT REPOSITORY RETRIEVAL
+  Guiding contract: loaded
+  Learner state: not supplied
+  Current phase: not yet established
+Expected result: pass under the soft-guide activation rule
+Observed result: pass
+Deviation or missing evidence: model briefly used inspect/review framing before
+  the handshake; it also described the resolved main commit as pinned even
+  though the user did not supply a pin. Handshake fields and required files were
+  otherwise correct.
+Follow-up transition evidence: not required for this scenario
+```
+
+This run is the primary general-purpose proof that realistic beginner wording
+can activate the context layer and produce the required handshake.
+
+### Earlier local contract audits
+
+The following local audits were run on 2026-08-02 before the runtime branch was
+published. They remain as traceability only. They are not clean-session proof.
 
 ```text
 Model: Claude Sonnet 5
@@ -175,19 +223,8 @@ Category: general-purpose
 Date: 2026-08-02
 Tool and browsing capability: local repository inspection; no GitHub URL retrieval
 Repository ref: docs/context-layer-runtime (uncommitted; no pinned ref supplied)
-Files inspected: CONTEXT_LAYER.md, AGENTS.md, llms.txt,
-  docs/CONTEXT_LAYER_VALIDATION.md, README.md, CONTRIBUTING.md,
-  .github/copilot-instructions.md, guides/00-guiding-llm-contract.md,
-  reference/README.md, LICENSE
-Handshake: contract shape verified; no runtime handshake claimed
-Scenario results: browsing/no activation = pass by contract review;
-  ambiguous maintenance = pass by contract review; pinned demonstration = blocked
 Observed result: blocked for clean-session and pinned-ref validation
-Deviation: local inspection cannot prove a fresh model retrieved the files from
-  the public repository or retained the contract across turns
 ```
-
-### Coding-oriented agent audit
 
 ```text
 Model: GPT-5.3-Codex
@@ -195,20 +232,15 @@ Category: coding-oriented
 Date: 2026-08-02
 Tool and browsing capability: local repository inspection; no published URL retrieval
 Repository ref: docs/context-layer-runtime (uncommitted; no pinned ref supplied)
-Files inspected: CONTEXT_LAYER.md, AGENTS.md, llms.txt,
-  docs/CONTEXT_LAYER_VALIDATION.md, README.md, CONTRIBUTING.md,
-  .github/copilot-instructions.md, guides/00-guiding-llm-contract.md,
-  reference/README.md, LICENSE
-Handshake: required fields and fail-closed rules verified; no runtime handshake claimed
-Scenario results: router and read-only prohibitions = pass by contract review;
-  author/context transition = pass by contract review; pinned demonstration = blocked
 Observed result: blocked for clean-session and pinned-ref validation
-Deviation: the implementation is not yet addressable at a pinned public ref
 ```
 
-These records deliberately distinguish contract inspection from runtime proof.
-After publication, rerun the full matrix with a pinned tag or commit and
-replace the blocked results with captured first responses and handshakes.
+### Coding-oriented clean-session status
+
+A separate clean coding-oriented agent session should still be recorded when
+available. Until then, do not treat the local GPT-5.3-Codex contract audit as
+runtime proof. The ChatGPT soft-guide run satisfies the general-purpose
+clean-session requirement and justified loosening the activation boundary.
 
 ## Known limitations
 

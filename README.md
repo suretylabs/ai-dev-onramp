@@ -94,18 +94,30 @@ access that the chat client does not provide.
 
 ### Direct link path
 
-Use a chat that can open public GitHub files, then send:
+Use a chat that can open public GitHub files. A realistic beginner prompt is
+enough:
 
 ```text
-Mount https://github.com/suretylabs/ai-dev-onramp as the read-only context layer for this conversation. Retrieve CONTEXT_LAYER.md first and activate the context layer; do not modify the repository.
+https://github.com/suretylabs/ai-dev-onramp
+this link should help you serve as my guide to understanding and getting my computer ready to develop with AI
+```
+
+A more explicit prompt also works:
+
+```text
+Use https://github.com/suretylabs/ai-dev-onramp as my read-only guide for this session. Load CONTEXT_LAYER.md first and help me get my computer ready to develop with AI.
 ```
 
 The chat must retrieve the required files and return the activation handshake
 before teaching begins. If it says that it cannot open GitHub URLs, do not
 assume activation succeeded. Use the manual file-supply path instead.
 
+Bare curiosity such as "what is this repo?" should not activate the context
+layer. Guide, coach, onboarding, or setup intent should.
+
 For reproducible validation, replace the repository URL with a pinned commit
-or tag URL and make sure every file comes from that same ref.
+or tag URL and make sure every file comes from that same ref. If you do not
+pin a ref, the chat should report the commit or branch it actually loaded.
 
 ### Manual file-supply path
 
