@@ -22,9 +22,9 @@ model. Use one of these access paths:
 ### Direct repository access
 
 This is the preferred path when the AI client can open public GitHub files.
-Give the client the repository URL or pinned ref and an explicit activation
-request. The client must retrieve the required files itself and report the
-actual ref it used.
+Give the client the repository URL or pinned ref plus guide, setup, onboarding,
+or formal context-layer intent. The client must retrieve the required files
+itself and report the actual ref it used.
 
 Do not assume that every AI client can open a public URL. Client-specific
 features such as repository import or file attachment are optional product
@@ -55,16 +55,31 @@ fails closed.
 
 ## Activation boundary
 
-Do not activate this repository from a URL, a repository question, or ordinary
-browsing alone. Context mode begins only when the user explicitly identifies
-this repository as the read-only context layer for the conversation.
+Real users often give soft prompts. Treat clear guide or onboarding intent as
+activation, not only formal "mount context layer" wording.
 
-The activation request must make the intended role clear. A private activation
-capsule may initiate that request, but the public repository does not contain
-or require a particular private phrase. An opaque trigger by itself is not a
-portable activation mechanism; a portable request must tell the model to
-mount this repository as read-only context and either retrieve this file first
-or receive it as the first complete supplied file.
+**Activate** when the user points at this repository and asks you to use it as
+their guide, coach, onboarding path, setup help, or read-only context for
+getting ready to develop with this toolchain. Formal phrases help, but they
+are not required. Examples that should activate:
+
+- "Use this repo as my guide to get my computer ready to develop with AI."
+- "Mount this as read-only context and load CONTEXT_LAYER.md first."
+- "Help me follow this on-ramp."
+
+**Do not activate** from a bare URL, a request only to explain or summarize the
+repository, ordinary browsing, or curiosity with no guide or setup intent.
+Those stay in unmounted browsing mode.
+
+A private activation capsule may also initiate activation, but the public
+repository does not contain or require a particular private phrase. An opaque
+trigger by itself is not a portable activation mechanism. After activation is
+recognized, retrieve this file first or receive it as the first complete
+supplied file, then continue the required loading order.
+
+When the user did not pin a commit or tag, resolve the repository ref you
+actually loaded and report it honestly. Do not call an unpinned `main`
+resolution a user-pinned ref.
 
 ## Modes
 
