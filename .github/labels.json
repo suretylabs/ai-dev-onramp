@@ -1,0 +1,92 @@
+[
+  {
+    "name": "type: feature",
+    "color": "bfdbfe",
+    "description": "New guide, template, or track"
+  },
+  {
+    "name": "type: enhancement",
+    "color": "93c5fd",
+    "description": "Improvements to existing guides, templates, or wording"
+  },
+  {
+    "name": "type: bug",
+    "color": "fca5a5",
+    "description": "Incorrect, outdated, or broken instructions/links"
+  },
+  {
+    "name": "type: chore",
+    "color": "ddd6fe",
+    "description": "Maintenance, restructuring, or non-content changes"
+  },
+  {
+    "name": "type: docs",
+    "color": "fde68a",
+    "description": "Documentation-only changes"
+  },
+  {
+    "name": "stack: docs",
+    "color": "fde68a",
+    "description": "Guides, visuals, templates, or reference material"
+  },
+  {
+    "name": "stack: python",
+    "color": "c8e6c9",
+    "description": "Python/uv track reference or tooling work"
+  },
+  {
+    "name": "scope: small",
+    "color": "d9f99d",
+    "description": "Small, low-risk change (<= 2-3 hrs)"
+  },
+  {
+    "name": "scope: medium",
+    "color": "bef264",
+    "description": "Moderate change (up to ~1-2 days)"
+  },
+  {
+    "name": "scope: large",
+    "color": "a3e635",
+    "description": "Larger or riskier change (multi-day)"
+  },
+  {
+    "name": "priority: low",
+    "color": "e5e7eb",
+    "description": "Nice-to-have or low urgency"
+  },
+  {
+    "name": "priority: medium",
+    "color": "fbbf24",
+    "description": "Standard priority"
+  },
+  {
+    "name": "priority: high",
+    "color": "dc2626",
+    "description": "Time-sensitive or high impact"
+  },
+  {
+    "name": "dependency: external",
+    "color": "fb923c",
+    "description": "Requires input, approval, access, or data outside repo-to-repo engineering work."
+  },
+  {
+    "name": "dependency: cross-repo",
+    "color": "a78bfa",
+    "description": "Requires work or validation in another Surety repository."
+  },
+  {
+    "name": "coordination: cross-repo",
+    "color": "8b5cf6",
+    "description": "Requires active sequencing, handoff, or approval with another Surety repository."
+  },
+  {
+    "name": "coordination: external",
+    "color": "f59e0b",
+    "description": "Requires active sequencing, handoff, or approval outside repo-to-repo engineering work."
+  },
+  {
+    "name": "good first issue",
+    "color": "39ff14",
+    "description": "Good for newcomers"
+  }
+]
