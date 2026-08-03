@@ -181,17 +181,25 @@ Do not add a success-shaped handshake when a required file is missing.
 
 ## Failure behavior
 
-Activation fails closed when the repository cannot be accessed and the
-required files have not been supplied, when this entrypoint, the guiding
-contract, `README.md`, or a supplied required ref is unavailable or ambiguous,
-or when a manually supplied required file is incomplete, omitted, or
-identified as coming from a different ref. It also fails closed when the user
-requires learner state to resume but the state document is missing or
-inaccessible.
+Activation fails closed when any of the following is true:
+
+- **Direct repository access:** the client cannot retrieve this entrypoint, the
+  guiding contract, or `README.md` from the requested repository ref, and the
+  learner has not switched to complete manual file supply.
+- **Manual file supply:** a required file is missing, visibly incomplete, or
+  the learner does not declare a usable source ref for the supplied set; or
+  the supplied files identify different refs.
+- **Learner state:** the user requires learner state to resume, but the state
+  document is missing or inaccessible.
+
+Do not fail a manual-path activation merely because the client cannot open the
+cited GitHub source URL. On the manual path, the source ref is user-attested
+from the learner's declared URLs and file identities; inability to fetch those
+URLs is expected and is not itself a missing dependency.
 
 Report the exact missing or invalid dependency and ask only for the smallest
-corrective action, such as providing the complete file from the same ref
-through the manual file-supply fallback. For example:
+corrective action, such as providing the complete file from the same declared
+ref through the manual file-supply fallback. For example:
 
 ```text
 Context layer activation failed.

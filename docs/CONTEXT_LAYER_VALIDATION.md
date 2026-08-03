@@ -85,9 +85,9 @@ guiding contract, and `README.md` were directly retrieved or completely
 supplied at the same declared ref. Treat the ref as directly verified for the
 direct path and user-attested for the manual path.
 
-For direct repository access, confirm that the first response contains. For
-manual file supply, confirm that the final handshake candidate after the last
-required file contains:
+For direct repository access, confirm that the first response contains the
+handshake shape below. For manual file supply, confirm that the final
+handshake candidate after the last required file contains the same shape:
 
 ```text
 Context layer active: ai-dev-onramp

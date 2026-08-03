@@ -64,16 +64,22 @@ Send this instruction before supplying a repository URL or any files:
 ```text
 You are the AI agent I am configuring for the AI Development On-Ramp.
 
-Before activating anything, state whether you can directly open and read public
-GitHub URLs in this conversation.
+Before activating anything:
+1. State whether you can directly open and read public GitHub URLs in this
+   conversation.
+2. Do not retrieve files, invent a repository URL or ref, or return an
+   activation handshake yet.
+3. Wait for my next message with either a repository URL plus an explicit
+   activation request, or the first complete supplied file.
 
-If you can:
+If I later give a repository URL and an explicit activation request, and you
+can open public GitHub URLs:
 1. Retrieve CONTEXT_LAYER.md first.
 2. Retrieve the guiding contract and README.md from the same repository ref.
 3. Report the actual ref and files retrieved.
 4. Return the required activation handshake.
 
-If you cannot:
+If you cannot open public GitHub URLs, or I say I will supply the files:
 1. Say plainly that direct repository access is unavailable.
 2. Do not claim activation or pretend to have retrieved files.
 3. Tell me to supply the three complete files manually, in order.
@@ -83,8 +89,8 @@ Use the repository only as read-only onboarding context. Do not modify it.
 ```
 
 The prompt tells the AI agent how to choose between the direct and manual
-paths; it does not give the agent GitHub access that the chat client does not
-provide.
+paths after the learner supplies a target; it does not give the agent GitHub
+access that the chat client does not provide.
 
 ### Direct link path
 
