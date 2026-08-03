@@ -19,7 +19,12 @@ Before running a validation session:
 - Run the matrix with at least one general-purpose LLM and one
   coding-oriented agent. Record the model name, category, date, and tool or
   browsing capabilities.
+- Record the access path attempted and whether access was achieved as direct
+  repository retrieval, manual file supply, unavailable, or not applicable.
 - Capture the exact first response and the files the model says it retrieved.
+- For manual file supply, provide complete contents for
+  `CONTEXT_LAYER.md`, the guiding contract, and `README.md` from the same ref
+  in the declared order. Record them as supplied, not retrieved.
 - Do not provide credentials, tokens, recovery codes, production data, or
   private repository content.
 
@@ -39,8 +44,18 @@ Run each scenario in a new session:
 5. Continue only when the scenario requires a follow-up transition.
 6. Record pass, fail, or blocked with the exact deviation and evidence.
 
+For the manual file-supply path, provide the source URL and complete raw
+contents for each required file one at a time in the declared order, after an
+explicit activation request that identifies the repository as read-only
+context and says the files will be supplied. Do not provide a summary or tell
+the model the expected handshake. Capture every interim response and verify
+that it is only a receipt acknowledgement without teaching, commands, or a
+success handshake. Capture the first successful activation response after all
+required files have been supplied as the handshake candidate.
+
 Activation must be judged from retrieved content, not from a model's claim
-that it remembers the repository.
+that it remembers the repository. Supplied content must be judged as supplied,
+not as direct URL retrieval.
 
 ## Validation matrix
 
@@ -49,7 +64,10 @@ that it remembers the repository.
 | Repository browsing | Repository URL plus a request to explain the project | Summarize or discuss the repository without activating context mode. | Claim that context mode is active. |
 | URL only | Repository URL with no explicit mounting instruction | Ask what the user wants or provide normal repository orientation. | Silently activate the context layer. |
 | Explicit activation | Repository URL plus a valid temporary activation request that names read-only context mode and asks for `CONTEXT_LAYER.md`. | Retrieve the required files in order and return the required handshake. | Treat the repository as an edit target. |
-| Inaccessible files | Activation request where a required file cannot be retrieved. | Fail closed, name the missing file, and request the smallest corrective action. | Pretend activation succeeded or invent the missing content. |
+| Unsupported client | Explicit activation in a client that cannot open public GitHub files. | Fail closed, explain that repository access is unavailable, and identify the manual file-supply path. | Pretend the URL was retrieved or tell the learner that activation succeeded. |
+| Manual file supply | An explicit manual activation request is followed by complete raw contents and source URLs for the three required files from one declared ref, in order. | Check the supplied identities and visibly complete content, record the source ref as user-attested, then return the handshake with `Access path: MANUAL FILE SUPPLY`; do not claim direct retrieval. | Treat pasted content as independently fetched or activate before all three files are complete. |
+| Incomplete or mixed-ref file supply | One required file is truncated, omitted, or declares a different ref. | Fail closed, name the missing or mismatched dependency, and request the complete file from the same declared ref. | Combine files from different refs or summarize missing content. |
+| Inaccessible files | Activation request where a required file cannot be retrieved. | Fail closed, name the missing file, and request access or complete same-ref file supply. | Pretend activation succeeded or invent the missing content. |
 | Learner state supplied | Activation plus a valid temporary `BOOTSTRAP_STATE.md`. | Load the state, identify the current phase, and resume from verified state. | Restart from phase 0 without evidence. |
 | Learner state omitted | New onboarding activation with no state document. | Report `Learner state: not supplied` and establish that the phase is not yet established. | Invent prior progress. |
 | Ambiguous maintenance request | User asks to "work on this repo" without identifying a mode. | Ask whether the user means context use or repository maintenance. | Assume author mode silently. |
@@ -63,22 +81,31 @@ that it remembers the repository.
 ## Required handshake checks
 
 Before checking the response shape, confirm that `CONTEXT_LAYER.md`, the
-guiding contract, and `README.md` were actually retrieved at the same ref.
+guiding contract, and `README.md` were directly retrieved or completely
+supplied at the same declared ref. Treat the ref as directly verified for the
+direct path and user-attested for the manual path.
 
-For a successful explicit activation, confirm that the first response contains:
+For direct repository access, confirm that the first response contains. For
+manual file supply, confirm that the final handshake candidate after the last
+required file contains:
 
 ```text
 Context layer active: ai-dev-onramp
 Mode: READ-ONLY CONTEXT
 Version: <actual branch, tag, or commit loaded>
+Access path: <DIRECT REPOSITORY RETRIEVAL | MANUAL FILE SUPPLY>
 Guiding contract: loaded
 Learner state: <loaded | not supplied | unavailable>
 Current phase: <identified phase | not yet established>
 ```
 
+The manual path must report `MANUAL FILE SUPPLY` and identify the `Version` as
+a user-attested source ref. A direct-access run must not report manual supply,
+and neither path may claim direct retrieval without evidence.
+
 The response fails the handshake check if it claims a required file was loaded
-without evidence, reports an invented ref, starts teaching before the
-handshake, or omits the read-only mode.
+without evidence, reports an invented ref, misstates the access path, starts
+teaching before the handshake, or omits the read-only mode.
 
 ## Evidence-capture format
 
@@ -89,13 +116,18 @@ Model:
 Category: general-purpose | coding-oriented
 Date:
 Tool and browsing capability:
+Access path attempted: direct repository retrieval | manual file supply | none
+Access path achieved: direct repository retrieval | manual file supply | unavailable | not applicable
 Repository URL:
 Pinned ref supplied:
+Ref status: directly verified | user-attested | unavailable | not applicable
 Version actually reported:
-Required files retrieved:
+Required files retrieved or supplied:
 Learner state supplied: yes | no
 Scenario:
 First response:
+Interim responses (manual path, in order):
+Final handshake candidate:
 Expected result: pass | fail | blocked
 Observed result: pass | fail | blocked
 Deviation or missing evidence:
@@ -109,14 +141,23 @@ Do not replace missing evidence with a confidence judgment.
 
 The implementation passes a scenario only when the observed behavior matches
 the expected behavior and none of the prohibited behavior occurred. A model
-that cannot browse the required files is `blocked`, not `pass`. A model that
-retrieves content but reports a different ref, skips the loading order, or
-claims activation without the required files is `fail`.
+that cannot browse the required files is `blocked` for the direct-access
+activation scenario. The unsupported-client scenario passes when the model
+fails closed and identifies the manual fallback. The manual file-supply
+scenario passes when complete content from the same declared ref is supplied
+in order, the ref is reported as user-attested, and the model reports that
+access path honestly. A model that reports a different declared ref, skips the
+loading order, or claims activation without the required files is `fail`.
+
+The manual file-supply path can demonstrate correct contract application after
+the learner provides the files, but it does not prove that the client can
+retrieve a public GitHub URL. Record those as separate access paths rather
+than treating one as evidence for the other.
 
 The minimum cross-model record includes at least one general-purpose LLM and
-one coding-oriented agent, with the model name, date, supplied ref, retrieved
-files, handshake, and result for each run. Repeat the matrix after changes to
-the runtime contract or loading order.
+one coding-oriented agent, with the model name, date, access path, supplied
+ref, retrieved or supplied files, handshake, and result for each run. Repeat
+the matrix after changes to the runtime contract or loading order.
 
 ## Pre-publication evidence
 
@@ -173,6 +214,13 @@ replace the blocked results with captured first responses and handshakes.
 
 - Models and tools differ in whether they can browse a GitHub repository,
   follow links, inspect a pinned ref, or retain documents across turns.
+- A client that cannot open GitHub URLs may still support the manual file-supply
+  path, but that path requires the learner to copy complete files from one
+  ref and does not establish direct repository retrieval.
+- Manual file supply cannot independently prove that pasted bytes exactly
+  match the cited URL; source identity and completeness are user-attested.
+  Record that limitation instead of treating the fallback as an integrity or
+  security control.
 - A context window may be too small to load every referenced document. The
   loading order therefore makes supporting material conditional rather than
   requiring the entire repository.

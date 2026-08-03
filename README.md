@@ -52,6 +52,82 @@ This repository is not the learner's application repository. Learner-specific
 state, project decisions, project briefs, and evidence belong in the learner's
 own project or companion repository.
 
+## Getting the context layer into an AI chat
+
+You do not need Git, a local clone, or a client-specific "attach" or "import"
+feature to start. Use the access path your AI chat supports.
+
+### Tell the AI agent what to do
+
+Send this instruction before supplying a repository URL or any files:
+
+```text
+You are the AI agent I am configuring for the AI Development On-Ramp.
+
+Before activating anything, state whether you can directly open and read public
+GitHub URLs in this conversation.
+
+If you can:
+1. Retrieve CONTEXT_LAYER.md first.
+2. Retrieve the guiding contract and README.md from the same repository ref.
+3. Report the actual ref and files retrieved.
+4. Return the required activation handshake.
+
+If you cannot:
+1. Say plainly that direct repository access is unavailable.
+2. Do not claim activation or pretend to have retrieved files.
+3. Tell me to supply the three complete files manually, in order.
+4. Wait until all three are supplied before returning the handshake.
+
+Use the repository only as read-only onboarding context. Do not modify it.
+```
+
+The prompt tells the AI agent how to choose between the direct and manual
+paths; it does not give the agent GitHub access that the chat client does not
+provide.
+
+### Direct link path
+
+Use a chat that can open public GitHub files, then send:
+
+```text
+Mount https://github.com/suretylabs/ai-dev-onramp as the read-only context layer for this conversation. Retrieve CONTEXT_LAYER.md first and activate the context layer; do not modify the repository.
+```
+
+The chat must retrieve the required files and return the activation handshake
+before teaching begins. If it says that it cannot open GitHub URLs, do not
+assume activation succeeded. Use the manual file-supply path instead.
+
+For reproducible validation, replace the repository URL with a pinned commit
+or tag URL and make sure every file comes from that same ref.
+
+### Manual file-supply path
+
+This fallback works when the AI chat cannot open GitHub URLs:
+
+1. Send this activation request before supplying any files:
+
+   ```text
+   I explicitly identify this repository as the read-only context layer for this conversation. I cannot provide direct GitHub URL access, so I will supply the required files from the same repository ref in the declared order. Do not return the activation handshake until all required files are complete.
+   ```
+
+2. Open [`CONTEXT_LAYER.md`](https://github.com/suretylabs/ai-dev-onramp/blob/main/CONTEXT_LAYER.md).
+3. Select the file's `Raw` view, copy the complete contents, and paste them
+   into the chat with the source URL.
+4. Repeat for the
+   [`guiding contract`](https://github.com/suretylabs/ai-dev-onramp/blob/main/guides/00-guiding-llm-contract.md),
+   then [`README.md`](https://github.com/suretylabs/ai-dev-onramp/blob/main/README.md),
+   keeping the same order and repository ref.
+5. Wait for the AI to confirm all three required files before supplying
+   learner state or asking it to begin onboarding.
+
+The AI must report `Access path: MANUAL FILE SUPPLY`, identify the source ref
+as user-attested, and must not claim that it retrieved URLs it only received as
+pasted content. Do not use truncated files, files from different refs, or
+summaries in place of the complete files. This fallback relies on the learner
+supplying the complete contents; it is not an independent integrity or
+security check.
+
 For an explicitly activated AI-guided session, follow
 [`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) rather than inferring the loading order:
 
