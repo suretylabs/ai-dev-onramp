@@ -32,14 +32,33 @@ The material has four layers:
 - [`guides/`](guides/) contains the procedural and instructional system.
 - [`visuals/`](visuals/) contains the mental-model companion.
 - [`templates/`](templates/) contains reusable state, decision, and instruction templates.
-- [`reference/`](reference/) contains per-stack technical standards, starting with the Python/uv track.
+- [`reference/`](reference/README.md) contains per-stack technical standards, starting with the Python/uv track.
 
-For an AI-guided session, provide the LLM with:
+## Operating modes
 
-1. [`guides/00-guiding-llm-contract.md`](guides/00-guiding-llm-contract.md)
-2. this `README.md`
-3. the guide for the current phase
-4. [`templates/BOOTSTRAP_STATE.md`](templates/BOOTSTRAP_STATE.md) once work begins
+This repository has two distinct roles:
+
+- **Read-only context mode** uses the public on-ramp as governing guidance for
+  an AI-assisted onboarding conversation. It requires an explicit user
+  instruction; opening the repository or asking about it does not activate the
+  mode. Start with [`CONTEXT_LAYER.md`](CONTEXT_LAYER.md), which defines the
+  loading order, activation handshake, failure behavior, and mode transitions.
+- **Author mode** maintains this repository itself. Use
+  [`AGENTS.md`](AGENTS.md), then [`.github/copilot-instructions.md`](.github/copilot-instructions.md)
+  and [`CONTRIBUTING.md`](CONTRIBUTING.md), when the user explicitly asks for
+  repository maintenance.
+
+This repository is not the learner's application repository. Learner-specific
+state, project decisions, project briefs, and evidence belong in the learner's
+own project or companion repository.
+
+For an explicitly activated AI-guided session, follow
+[`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) rather than inferring the loading order:
+
+1. retrieve the runtime entrypoint;
+2. load the guiding contract and this README;
+3. load learner state when supplied;
+4. load the current phase guide and other references only as needed.
 
 The LLM should normally work interactively:
 
@@ -142,4 +161,4 @@ track.
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+PolyForm Noncommercial License 1.0.0. See [`LICENSE`](LICENSE).
