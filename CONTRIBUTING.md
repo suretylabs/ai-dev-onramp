@@ -34,12 +34,13 @@ guide, and [`.github/copilot-instructions.md`](.github/copilot-instructions.md).
 
 | Path | Status | Purpose |
 |---|---|---|
-| `README.md` | present | Entry point: target environment, guide sequence table, visual companion, governing principles, templates list. |
+| `README.md` | present | Entry point: target environment, guide sequence table, visual companion, governing principles, templates list, and lane index. |
 | `LICENSE` | present | PolyForm Noncommercial License 1.0.0. |
 | `guides/` | present | Procedural and instructional sequence for phases 0–9, indexed by `guides/README.md`. |
 | `visuals/` | present | Mental-model companion. One Mermaid diagram per page, indexed by `visuals/README.md`. |
 | `templates/` | present | Reusable bootstrap state, decision, project brief, and Copilot instruction templates, indexed by `templates/README.md`. |
 | `reference/` | present | Per-stack technical reference content, starting with `reference/PYTHON_STYLEGUIDE.md` for the Python/uv track. On-ramp teaching material, not this repository's own coding standard. |
+| `consultant-lane/` | present | Independent **lane** for consultant-led business-process capture (own guides, templates, visuals). Not part of the developer phase numbering. |
 
 ## Content conventions
 
@@ -118,6 +119,33 @@ lighter-weight: a single non-numbered stub guide (for example
 [`guides/alt-wsl-development-path.md`](guides/alt-wsl-development-path.md))
 plus an "Alternative paths" entry in `guides/README.md`, with no new
 namespace and no change to the existing numbered sequence.
+
+## Lanes versus tracks
+
+This repository distinguishes two extension shapes:
+
+| Concept | Purpose | Layout |
+|---|---|---|
+| **Track** | Same developer-onboarding purpose; different OS, language/runtime, or data stack | Future `guides/<track-slug>/` and `visuals/<track-slug>/` per [Extending to another tech stack](#extending-to-another-tech-stack) |
+| **Lane** | Different audience and durable output; reuses guided elicitation, templates, and LLM-attach patterns | Top-level directory (for example [`consultant-lane/`](consultant-lane/README.md)) with its own `guides/`, `templates/`, and `visuals/` |
+
+Do **not** fold a lane into the developer `guides/00`–`09` numbering, and do
+**not** implement a lane by abusing the track-slug mechanism. Tracks vary the
+stack; lanes vary the job.
+
+### Proposing another lane
+
+1. **Open an issue first.** State the audience, the single primary output
+   artifact, why the work is not a developer-track phase, and how it reuses
+   (without rewriting) existing contracts such as durable Markdown context
+   attachment.
+2. **Keep the lane self-contained.** Prefer
+   `<lane-slug>/README.md` plus nested `guides/`, `templates/`, and
+   `visuals/` indexes over scattering files into the developer tree.
+3. **Link from the root README only.** Add a row to the root "Lanes" table;
+   do not renumber the developer guide sequence.
+4. **Stay public-safe.** Lane teaching material and examples must remain
+   synthetic. Real client captures belong in the client's store.
 
 ## Pull requests
 
