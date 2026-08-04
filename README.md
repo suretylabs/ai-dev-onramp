@@ -34,6 +34,11 @@ The material has four layers:
 - [`templates/`](templates/) contains reusable state, decision, and instruction templates.
 - [`reference/`](reference/README.md) contains per-stack technical standards, starting with the Python/uv track.
 
+For the developer track, [`guides/README.md`](guides/README.md) is the
+canonical detailed phase and gate index. It also has a
+[choose-by-current-need map](guides/README.md#choose-by-current-need) for
+topic-first discovery; that map does not replace the ordered phase sequence.
+
 ## Lanes (related on-ramps)
 
 A **lane** is a sibling on-ramp with a different audience and output. It reuses
@@ -189,18 +194,12 @@ The unit of progress is a **verified state transition**, not a command sent.
 
 ## Guide sequence
 
-| Phase | Guide | Outcome |
-|---|---|---|
-| 0 | [Guiding LLM contract](guides/00-guiding-llm-contract.md) | Defines the teaching, command, evidence, question, and gating behavior. |
-| 1 | [Mental model and lexicon](guides/01-mental-model-and-lexicon.md) | Maps established development terminology to current Git, GitHub, VS Code, and Python concepts. |
-| 2 | [Windows 11 baseline](guides/02-windows-11-baseline.md) | Establishes PowerShell 7, Windows Terminal, WinGet awareness, and the development root. |
-| 3 | [GitHub foundation](guides/03-github-foundation.md) | Establishes identity, organization ownership, Copilot access, repository conventions, and lightweight safeguards. |
-| 4 | [Git and GitHub CLI](guides/04-git-and-github-cli.md) | Installs local Git and `gh`, clones the known remote, and proves the local/remote round trip. |
-| 5 | [VS Code and Copilot](guides/05-vscode-and-copilot.md) | Integrates the editor and AI, then captures the real project before application code is generated. |
-| 6 | [Python 3.14 and uv](guides/06-python-314-and-uv.md) | Creates a reproducible Python environment managed exclusively by uv. |
-| 7 | [First integrated workspace](guides/07-first-integrated-workspace.md) | Proves Polars, Parquet, DuckDB, Ruff, Pyright, and pytest as one working system. |
-| 8 | [Daily engineering loop](guides/08-daily-engineering-loop.md) | Establishes the normal inspect, plan, edit, validate, commit, push, and review cycle. |
-| 9 | [Ramp plan](guides/09-ramp-plan.md) | Provides a capability-based path from setup to a useful business vertical slice. |
+The developer track is ordered by prerequisites and verified phase gates.
+Follow the complete [procedural guide index](guides/README.md) for the
+canonical phase map. If you are starting from a specific concern rather than a
+phase number, use its
+[choose-by-current-need map](guides/README.md#choose-by-current-need), then
+continue through the ordered sequence.
 
 ## Visual companion
 

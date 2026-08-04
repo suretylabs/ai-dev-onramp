@@ -1,6 +1,29 @@
 # Procedural Guides
 
-These guides are the step-by-step operating layer for the first AI Development On-Ramp track. Use the matching page under [`../visuals/`](../visuals/) as the mental-model companion.
+These guides are the step-by-step operating layer for the first AI Development
+On-Ramp track. This page is the canonical detailed index for the developer
+track. Use the matching page under [`../visuals/`](../visuals/) as the
+mental-model companion.
+
+## Choose by current need
+
+Use this map to find the relevant topic when you arrive with a particular
+concern. It is a discovery aid, not an alternative sequence: before acting,
+identify the first unmet gate in the ordered phase table and resume there. No
+row authorizes skipping prerequisite phases.
+
+| Current concern | Read first | Required ordered path | Completion evidence |
+|---|---|---|---|
+| Local environment | [Phase 2: Windows 11 baseline](02-windows-11-baseline.md) | Complete the first unmet phase before Phase 4; continue through Phases 4-7 as the declared stack requires. | The relevant local tool or workspace gate passes. |
+| GitHub identity and ownership | [Phase 3: GitHub foundation](03-github-foundation.md) | Phase 3, then Phase 4 for authenticated command-line use. | Identity, ownership, access, and Copilot prerequisites are verified. |
+| Repository selection and setup | [Phase 3: GitHub foundation](03-github-foundation.md) | Phase 3 establishes ownership and the remote; Phase 4 attaches the local clone; Phase 5 verifies the workspace and captures the project. | The intended repository, remote, branch, and workspace are verified. |
+| Connect and validate | [Phase 4: Git and GitHub CLI](04-git-and-github-cli.md) | Complete Phase 3 first if it is unmet; Phase 4 proves the local-to-remote round trip; continue through Phases 5-7 for the integrated workspace proof. | The required local-to-remote round trip and relevant integrated gate pass. |
+
+Phase 0 and Phase 1 are the cross-cutting operating contract and terminology
+orientation. Phases 8 and 9 establish the ongoing engineering loop and
+capability plan after initial setup.
+
+## Ordered phase sequence
 
 | Phase | Guide | Primary gate |
 |---|---|---|
