@@ -42,22 +42,28 @@ this repository's guided-elicitation and durable-artifact pattern, but it is
 stack **track** (tracks vary OS/language/data stack for the same developer
 purpose — see [`CONTRIBUTING.md`](CONTRIBUTING.md)).
 
-| Lane | Audience | Output |
+| Lane | Audience | Output | Runtime entrypoint |
 |---|---|---|
-| [Consultant Process-Capture](consultant-lane/README.md) | Consultant, trainer, or manager working with a veteran operator | A signed `PROCESS_CAPTURE.md` a new hire can attach to an LLM session as read-only procedure context for one business process |
+| [Consultant Process-Capture](consultant-lane/README.md) | Consultant, trainer, or manager working with a veteran operator | A signed `PROCESS_CAPTURE.md` a new hire can attach to an LLM session as read-only procedure context for one business process | [`consultant-lane/CONTEXT_LAYER.md`](consultant-lane/CONTEXT_LAYER.md) |
 
 The developer track in this README remains the default path for setting up an
 AI development environment.
 
 ## Operating modes
 
-This repository has two distinct roles:
+This repository has three distinct modes:
 
-- **Read-only context mode** uses the public on-ramp as governing guidance for
-  an AI-assisted onboarding conversation. It requires an explicit user
-  instruction; opening the repository or asking about it does not activate the
-  mode. Start with [`CONTEXT_LAYER.md`](CONTEXT_LAYER.md), which defines the
+- **Read-only developer context mode** uses the public developer on-ramp as
+  governing guidance for an AI-assisted developer-onboarding conversation. It
+  requires explicit developer-onramp intent; opening the repository or asking
+  about it does not activate the mode. Start with
+  [`CONTEXT_LAYER.md`](CONTEXT_LAYER.md), which defines the developer runtime
   loading order, activation handshake, failure behavior, and mode transitions.
+- **Read-only consultant process-capture context mode** guides a consultant,
+  trainer, or manager through capturing one business process with an SME. It
+  requires explicit consultant-lane/process-capture intent. Start with
+  [`consultant-lane/CONTEXT_LAYER.md`](consultant-lane/CONTEXT_LAYER.md), not
+  the root runtime entrypoint.
 - **Author mode** maintains this repository itself. Use
   [`AGENTS.md`](AGENTS.md), then [`.github/copilot-instructions.md`](.github/copilot-instructions.md)
   and [`CONTRIBUTING.md`](CONTRIBUTING.md), when the user explicitly asks for
@@ -67,7 +73,11 @@ This repository is not the learner's application repository. Learner-specific
 state, project decisions, project briefs, and evidence belong in the learner's
 own project or companion repository.
 
-## Getting the context layer into an AI chat
+## Getting the developer context layer into an AI chat
+
+For a consultant process-capture conversation, use the
+[Consultant Process-Capture Lane runtime entrypoint](consultant-lane/CONTEXT_LAYER.md)
+instead. The instructions below apply only to the developer on-ramp.
 
 You do not need Git, a local clone, or a client-specific "attach" or "import"
 feature to start. Use the access path your AI chat supports.

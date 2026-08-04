@@ -43,6 +43,34 @@ organization's data-handling rules; discipline about not inventing missing
 steps; and a place to store the finished artifact for the people who will use
 it.
 
+## Activate this lane in an AI chat
+
+Start with this lane's own runtime entrypoint:
+[`CONTEXT_LAYER.md`](CONTEXT_LAYER.md). It selects a **read-only consultant
+process-capture context**. Do not use the root
+[`../CONTEXT_LAYER.md`](../CONTEXT_LAYER.md) for this job; that entrypoint
+activates the separate developer on-ramp.
+
+Send an explicit request such as:
+
+```text
+Use the Consultant Process-Capture Lane in suretylabs/ai-dev-onramp as
+read-only guidance for this conversation.
+
+I am a consultant preparing to capture one business process with an SME.
+Load consultant-lane/CONTEXT_LAYER.md first. Act as a process-capture
+facilitator, not as a repository reviewer or author.
+
+Do not invent procedure. Preserve supplied evidence, identify unknowns and
+contradictions, and require SME validation before treating the capture as
+complete.
+```
+
+The runtime entrypoint defines direct repository access, manual file supply,
+the required loading order, activation handshake, and failure behavior. Do
+not begin the capture until the AI returns its consultant-lane activation
+handshake.
+
 ## Start here
 
 | Layer | Path | Purpose |
@@ -89,8 +117,9 @@ copy preserves the in-scope procedure and replaces prohibited data with roles
 or approved placeholders; it is a temporary derived input, not a second
 canonical process artifact.
 
-For attachment mechanics used by this repository itself, see the root
-[Getting the context layer into an AI chat](../README.md#getting-the-context-layer-into-an-ai-chat)
+For developer-onramp attachment mechanics used by this repository itself, see
+the root
+[Getting the developer context layer into an AI chat](../README.md#getting-the-developer-context-layer-into-an-ai-chat)
 section and [`CONTEXT_LAYER.md`](../CONTEXT_LAYER.md). A finished process
 capture is a *different* document with a *similar* attach pattern: supply the
 complete approved procedure context, tell the model it is governing procedure

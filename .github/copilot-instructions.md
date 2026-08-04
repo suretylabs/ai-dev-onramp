@@ -3,8 +3,11 @@
 ## Mode boundary
 
 These instructions govern **author mode** and maintenance of this repository.
-When a user explicitly mounts the repository as a read-only context layer,
+When a user explicitly mounts the developer on-ramp as read-only context,
 [`AGENTS.md`](../AGENTS.md) and [`CONTEXT_LAYER.md`](../CONTEXT_LAYER.md)
+govern instead. When they explicitly mount the Consultant Process-Capture Lane,
+[`AGENTS.md`](../AGENTS.md) and
+[`consultant-lane/CONTEXT_LAYER.md`](../consultant-lane/CONTEXT_LAYER.md)
 govern instead. Using the repository as context is not authorization to review,
 modify, test, or create issues or pull requests for this repository.
 

@@ -7,12 +7,14 @@ codebase. Contributions are almost always Markdown and Mermaid, not code.
 
 ## Operating modes
 
-This repository can be used as read-only context for an onboarding
-conversation or maintained as a documentation repository. Read-only context
-mode requires an explicit user activation and is governed by
-[`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) and [`AGENTS.md`](AGENTS.md). It does
-not authorize review, testing, issue creation, or modification of this
-repository.
+This repository can be used as read-only context for a developer-onboarding
+or consultant process-capture conversation, or maintained as a documentation
+repository. Read-only context mode requires an explicit user activation and is
+governed by [`AGENTS.md`](AGENTS.md) plus the matching runtime entrypoint:
+[`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) for developer onboarding or
+[`consultant-lane/CONTEXT_LAYER.md`](consultant-lane/CONTEXT_LAYER.md) for
+process capture. It does not authorize review, testing, issue creation, or
+modification of this repository.
 
 Author mode begins only when the user explicitly requests repository
 maintenance. In that mode, follow [`AGENTS.md`](AGENTS.md), this contributor

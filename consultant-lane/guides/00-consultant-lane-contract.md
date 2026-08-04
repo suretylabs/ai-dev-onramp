@@ -3,6 +3,14 @@
 > Companion: [Consultant-lane flow](../visuals/00-consultant-lane-flow.md) ·
 > Lane index: [../README.md](../README.md)
 
+> **Runtime entry:** [`../CONTEXT_LAYER.md`](../CONTEXT_LAYER.md) defines how
+> this consultant lane is explicitly activated as read-only process-capture
+> context. It is loaded first; this contract is loaded second; the lane
+> `README.md`, client capture state when supplied, and phase material then
+> follow in the runtime entrypoint's order. The root
+> [`../../CONTEXT_LAYER.md`](../../CONTEXT_LAYER.md) is the separate runtime
+> entrypoint for the developer on-ramp and does not activate this lane.
+
 ## Mission
 
 Guide a facilitator through capturing **one** real business process from a

@@ -127,7 +127,7 @@ copy is only a temporary attachment.
 
 For this repository's own attach mechanics and access-path discipline, see:
 
-- [Getting the context layer into an AI chat](../../README.md#getting-the-context-layer-into-an-ai-chat)
+- [Getting the developer context layer into an AI chat](../../README.md#getting-the-developer-context-layer-into-an-ai-chat)
 - [`CONTEXT_LAYER.md`](../../CONTEXT_LAYER.md)
 
 Those pages govern mounting **this public on-ramp**. A client process capture
