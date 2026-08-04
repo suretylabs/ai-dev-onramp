@@ -2,6 +2,13 @@
 
 Determine the repository role before taking action.
 
+- If the user points specifically at the Consultant Process-Capture Lane as
+  their guide, coach, or read-only context for capturing a business process
+  with an SME, read
+  [`consultant-lane/CONTEXT_LAYER.md`](consultant-lane/CONTEXT_LAYER.md)
+  immediately and follow its loading order, handshake, and read-only rules.
+  Soft process-capture intent counts; formal "mount context layer" wording is
+  not required.
 - If the user points at this repository as their guide, coach, onboarding
   path, setup help, or read-only context, read
   [`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) immediately and follow its loading
