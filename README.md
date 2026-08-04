@@ -34,6 +34,21 @@ The material has four layers:
 - [`templates/`](templates/) contains reusable state, decision, and instruction templates.
 - [`reference/`](reference/README.md) contains per-stack technical standards, starting with the Python/uv track.
 
+## Lanes (related on-ramps)
+
+A **lane** is a sibling on-ramp with a different audience and output. It reuses
+this repository's guided-elicitation and durable-artifact pattern, but it is
+**not** a phase in the developer guide sequence below and is **not** a
+stack **track** (tracks vary OS/language/data stack for the same developer
+purpose — see [`CONTRIBUTING.md`](CONTRIBUTING.md)).
+
+| Lane | Audience | Output |
+|---|---|---|
+| [Consultant Process-Capture](consultant-lane/README.md) | Consultant, trainer, or manager working with a veteran operator | A signed `PROCESS_CAPTURE.md` a new hire can attach to an LLM session as read-only procedure context for one business process |
+
+The developer track in this README remains the default path for setting up an
+AI development environment.
+
 ## Operating modes
 
 This repository has two distinct roles:
