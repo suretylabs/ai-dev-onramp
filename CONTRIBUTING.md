@@ -36,13 +36,33 @@ guide, and [`.github/copilot-instructions.md`](.github/copilot-instructions.md).
 
 | Path | Status | Purpose |
 |---|---|---|
-| `README.md` | present | Entry point: target environment, guide sequence table, visual companion, governing principles, templates list, and lane index. |
+| `README.md` | present | Entry point: target environment, developer-track navigation, visual companion, governing principles, templates list, and lane index. |
 | `LICENSE` | present | PolyForm Noncommercial License 1.0.0. |
 | `guides/` | present | Procedural and instructional sequence for phases 0–9, indexed by `guides/README.md`. |
 | `visuals/` | present | Mental-model companion. One Mermaid diagram per page, indexed by `visuals/README.md`. |
 | `templates/` | present | Reusable bootstrap state, decision, project brief, and Copilot instruction templates, indexed by `templates/README.md`. |
 | `reference/` | present | Per-stack technical reference content, starting with `reference/PYTHON_STYLEGUIDE.md` for the Python/uv track. On-ramp teaching material, not this repository's own coding standard. |
 | `consultant-lane/` | present | Independent **lane** for consultant-led business-process capture (own guides, templates, visuals). Not part of the developer phase numbering. |
+
+## Canonical locations
+
+Keep public repository material separate from the working documents copied
+into a learner's project. The same path name can have a different role in the
+two repositories.
+
+| Content role | Canonical location | Rule |
+|---|---|---|
+| Public developer procedures and phase gates | `guides/` | `guides/README.md` is the detailed developer-track index. |
+| Public diagrams | `visuals/` | Diagrams remain companions to the procedures they explain. |
+| Public reusable templates | `templates/` | Public templates are copied into a target project when needed. |
+| Public stack-specific teaching reference | `reference/` | Reference content remains separate from the procedural sequence. |
+| Public support or validation records | Repository `docs/` when needed | It is not a second developer-curriculum tree. |
+| Learner-project state and project artifacts | The target project's `docs/` directory | Examples include `BOOTSTRAP_STATE.md`, `DECISIONS.md`, and `PROJECT_BRIEF.md`. |
+| Consultant process capture | `consultant-lane/` and approved client storage | This is a separate lane, not a developer phase or stack track. |
+
+Do not create a public developer-guide tree under root `docs/`. When public
+guides or templates name paths such as `docs/BOOTSTRAP_STATE.md`, they mean
+the target project's location unless the page explicitly says otherwise.
 
 ## Content conventions
 
