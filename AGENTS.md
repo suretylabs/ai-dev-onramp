@@ -10,7 +10,7 @@ Determine the repository role before taking action.
   Soft process-capture intent counts; formal "mount context layer" wording is
   not required.
 - If the user points at this repository as their guide, coach, onboarding
-  path, setup help, or read-only context for developer setup, read
+  path, setup help, or read-only context, read
   [`CONTEXT_LAYER.md`](CONTEXT_LAYER.md) immediately and follow its loading
   order, handshake, and read-only rules. Soft guide intent counts; formal
   "mount context layer" wording is not required.

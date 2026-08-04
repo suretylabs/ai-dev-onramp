@@ -43,7 +43,7 @@ stack **track** (tracks vary OS/language/data stack for the same developer
 purpose — see [`CONTRIBUTING.md`](CONTRIBUTING.md)).
 
 | Lane | Audience | Output | Runtime entrypoint |
-|---|---|---|
+|---|---|---|---|
 | [Consultant Process-Capture](consultant-lane/README.md) | Consultant, trainer, or manager working with a veteran operator | A signed `PROCESS_CAPTURE.md` a new hire can attach to an LLM session as read-only procedure context for one business process | [`consultant-lane/CONTEXT_LAYER.md`](consultant-lane/CONTEXT_LAYER.md) |
 
 The developer track in this README remains the default path for setting up an
