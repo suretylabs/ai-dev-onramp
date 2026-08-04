@@ -1,10 +1,12 @@
 # Process Capture: \<process name\>
 
-> Fill from SME observation or interview. Mark unknowns explicitly. Do **not**
-> invent steps, exceptions, systems, or pitfalls to complete a section.
+> Fill from SME observation, interview, or approved existing evidence. Mark
+> unknowns explicitly. Do **not** invent steps, exceptions, systems, or
+> pitfalls to complete a section.
 > Preserve the operator's terms first; add glossary entries for local jargon.
 > Never store passwords, tokens, recovery codes, or full account/cheque
-> numbers in this file.
+> numbers in this file. Retain raw transcripts, notes, screenshots, and
+> document excerpts separately; record only lightweight provenance below.
 
 ## Document control
 
@@ -16,6 +18,18 @@
 | Canonical path | |
 | Facilitator | |
 | Related captures | |
+
+## Source evidence and provenance
+
+> Record sources that support this capture without embedding their full
+> contents. A detailed source is evidence, not proof that the current
+> procedure is complete or authoritative. Keep raw evidence in its approved
+> canonical location. Use `observed`, `stated`, `document`, `inferred`, or
+> `unknown` for the claims extracted from each source.
+
+| Source ID | Source type | Date | Participant or origin | Evidence label(s) | Which portions of this capture it supports | Canonical retained location | Limitations / follow-up |
+|---|---|---|---|---|---|---|---|
+| SRC-01 | | YYYY-MM-DD | | | | | |
 
 ## Process identity and owner
 
@@ -101,11 +115,15 @@
 > Required section. List anything a safe performer still needs that is not
 > answered above. **Never silently delete this section to imply completeness.**
 > If truly empty after validation, write `None — SME confirmed no open gaps
-> for the stated success definition.`
+> for the stated success definition.` Resolved questions move into the
+> appropriate procedure section and are removed from this table. Use `open`
+> while the question awaits validation or an owner decision; a signed capture
+> may retain only `deferred` or `out of scope` rows. `blocked` prevents
+> sign-off.
 
 | ID | Gap | Why it matters | Owner | Disposition |
 |---|---|---|---|---|
-| Q1 | | | | open / deferred / resolved / out of scope |
+| Q1 | | | | open / deferred / out of scope / blocked |
 
 ## Sign-off
 
@@ -119,6 +137,16 @@
 > I confirm this version is accurate enough for the capture success definition
 > above. Known gaps remain only in **Open questions / unresolved gaps** with
 > disposition `deferred` or `out of scope`.
+
+## LLM attachment boundary
+
+> The signed canonical `PROCESS_CAPTURE.md` remains the sole durable process
+> artifact. Before attaching it to an LLM, apply the approved chat data
+> boundary. If the canonical file includes names, identifiers, source
+> locations, or other content not approved for that chat, attach a complete
+> **chat-safe session copy** that replaces those values with roles or approved
+> placeholders. Do not sign or store that temporary copy as a competing
+> process artifact.
 
 ## Revision history
 

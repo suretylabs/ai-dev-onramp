@@ -5,16 +5,102 @@
 
 ## Objective
 
-Gather process facts from the SME: happy path, decision branches, systems
-touched, timing, exceptions, escalation contacts, and the pitfalls new people
-usually hit. Prefer watching real work. Do not invent what was not shown or
-said.
+Gather process facts from the SME **or** normalize existing source evidence:
+happy path, decision branches, systems touched, timing, exceptions,
+escalation contacts, and the pitfalls new people usually hit. Prefer watching
+real work. Do not invent what was not shown, stated, or documented.
 
 ## Preconditions
 
 - Phase 1 gate passed.
 - Header-only or blank `PROCESS_CAPTURE.md` exists.
-- Session mode (observe / walkthrough / interview / hybrid) is known.
+- One entry path is selected: guided elicitation or existing evidence dump.
+- Any evidence sent to an LLM has passed the organization's approved
+  data-sharing and redaction boundary.
+
+## Two entry paths
+
+| Path | Use when | Do not assume |
+|---|---|---|
+| Guided elicitation | The facilitator can shadow, run a walkthrough, or interview the SME. | A single observed run covers every branch. |
+| Existing evidence dump | A transcript, voice-to-text output, observation notes, checklist/SOP, sanitized screenshot/document excerpt, or mixture already exists. | Detailed source material is current, complete, official, or safe to copy into procedure. |
+
+Both paths converge in **evidence normalization** and then enter the existing
+Phase 3 drafting and Phase 4 validation gates.
+
+## Existing evidence-dump ingestion
+
+### 1. Preserve and inventory the sources
+
+Keep each raw source outside `PROCESS_CAPTURE.md` in an approved client
+location. Give it a short identifier such as `SRC-01`, then record:
+
+- source type;
+- date or capture date;
+- participant or origin;
+- canonical retained location, if applicable;
+- the capture portions it may support; and
+- limitations (for example, "undated SOP" or "voice-to-text may have
+  misheard product names").
+
+Do not paste a large transcript into the process capture. Do not assume a
+source is authoritative because it is detailed.
+
+### 2. Normalize candidates without promoting them to procedure
+
+Create a temporary structured evidence summary that identifies candidate:
+
+- process boundaries;
+- actors and roles;
+- systems and tools;
+- happy-path steps;
+- decisions and branches;
+- exceptions;
+- pitfalls and tribal knowledge;
+- escalation paths;
+- systems of record;
+- local terminology; and
+- unresolved gaps.
+
+For each candidate claim, apply the evidence label from the lane contract:
+`observed`, `stated`, `document`, `inferred`, or `unknown`. A transcript
+claim is normally `stated`; an SOP/checklist claim is normally `document`;
+neither label makes it final procedure.
+
+### 3. Detect uncertainty before drafting
+
+List separately any statements that are:
+
+- contradictory across sources;
+- ambiguous ("usually," "close to," "sometimes," or undefined pronouns);
+- time-dependent (thresholds, names, system screens, cadence, or policy may
+  have changed); or
+- outside the agreed process boundary.
+
+Unsupported conclusions become **Open questions / unresolved gaps**, not
+procedure text.
+
+### 4. Prepare SME follow-up
+
+Generate a concise, prioritized set of questions that resolves the highest
+risk gaps first. Each question should name the source ID and ambiguity, for
+example:
+
+> `SRC-02` says a high-value batch needs approval; `SRC-04` says the clerk
+> submits all batches. Which rule is current, and what is the threshold?
+
+### 5. Produce the draft, then converge
+
+Give the facilitator:
+
+1. the structured evidence summary;
+2. contradictions, ambiguities, and unknowns;
+3. targeted SME follow-up questions; and
+4. a **draft** `PROCESS_CAPTURE.md` with lightweight source provenance.
+
+The output is not signed or supposedly complete. Continue through
+[Phase 3](03-drafting-the-process-capture.md) and
+[Phase 4](04-validation-and-handoff.md) exactly as for guided elicitation.
 
 ## Observation protocol
 
@@ -90,13 +176,15 @@ Use short prompts. Prefer the SME's words in the notes.
 For each fact, keep a light source tag when practical:
 
 ```text
-[observed] Opens MailRoom Pro batch for today's date
-[stated] If cheque is unsigned, puts in Rivera review tray
+[SRC-01 observed] Opens MailRoom Pro batch for today's date
+[SRC-02 stated] If cheque is unsigned, puts in Rivera review tray
+[SRC-03 document] SOP says controller approves flagged batches
 [inferred — confirm] Maybe same tray is used for stop-payments?
 ```
 
 Move every `inferred` item to confirmation or to open questions before draft
-finalization.
+finalization. Add a source-provenance entry for every retained source used to
+support the draft.
 
 ## Mid-session checkpoints
 
@@ -112,7 +200,7 @@ in open questions.
 
 ## Phase gate
 
-Pass only when the notes include, from the SME:
+Pass only when guided elicitation or normalized evidence includes:
 
 1. A coherent happy path inside the agreed boundary.
 2. Major decision branches the SME considers real (or an explicit "no major
@@ -122,6 +210,8 @@ Pass only when the notes include, from the SME:
    that I can think of" if truly empty after prompting).
 5. Escalation path for stuck cases.
 6. A working list of open questions for anything still unknown.
+7. For existing evidence, source provenance plus an explicit contradiction and
+   ambiguity review.
 
 ## Checkpoint prompt
 
@@ -138,3 +228,5 @@ Pass only when the notes include, from the SME:
 - Accepting "just use common sense" as a step.
 - Recording credentials "so the new hire has them."
 - Following the SME into a second process without rescoping.
+- Treating a detailed transcript or SOP as signed procedure.
+- Embedding the raw evidence dump in `PROCESS_CAPTURE.md`.

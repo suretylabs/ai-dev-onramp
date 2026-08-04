@@ -14,6 +14,26 @@
 | Facilitator | Sam (internal consultant, example) |
 | Related captures | Deposit discrepancy follow-up (not yet captured) |
 
+## Source evidence and provenance
+
+> **Synthetic source references only.** Raw sources are separately retained;
+> this table records the evidence that supported the capture without embedding
+> a full transcript or observation log.
+
+| Source ID | Source type | Date | Participant or origin | Evidence label(s) | Which portions of this capture it supports | Canonical retained location | Limitations / follow-up |
+|---|---|---|---|---|---|---|---|
+| SRC-01 | Interview transcript | 2026-07-08 | Jordan, AP clerk | `stated` | Trigger, steps 1–8, E2, E3, local terms | `evidence/interviews/2026-07-08-jordan-ap.md` (example) | Jordan said "if it is close to the threshold, I normally ask Rivera." That ambiguous claim became draft question Q-01 before validation. |
+| SRC-02 | Observation notes | 2026-07-10 | Sam, facilitator | `observed` | Steps 1–7, blue/red bag distinction, drawer handoff | `evidence/observations/2026-07-10-mail-run.md` (example) | One normal-volume run; it did not demonstrate a threshold approval or scanner outage. |
+| SRC-03 | LedgerApp approval-screen walkthrough | 2026-07-15 | Rivera, controller | `document`, `stated` | D2, Q-01 resolution | `evidence/validation/2026-07-15-rivera-approval.md` (example) | Current on-screen flag is authoritative; exact threshold value is intentionally not copied into this capture. |
+
+### Evidence-normalization note
+
+Before SME validation, `SRC-01`'s phrase "close to the threshold" had no
+defined meaning. It became **draft question Q-01**, not a procedure step.
+During validation, Rivera confirmed that LedgerApp's on-screen approval flag
+is authoritative, so Q-01 was resolved and removed from **Open questions /
+unresolved gaps**. Decision D2 records the validated rule below.
+
 ## Process identity and owner
 
 | Field | Value |
@@ -36,7 +56,7 @@
 ## Scope boundary
 
 - **Starts when**: AP desk accepts the mesh bag from the mailroom runner.
-- **Ends when**: Deposit batch is submitted in LedgerApp and the physical cheque packet is placed in the locked "treasury pickup" drawer.
+- **Ends when**: Deposit batch is submitted in LedgerApp, the physical cheque packet is placed in the locked "treasury pickup" drawer, and the empty blue bag is returned to the mailroom shelf.
 - **Explicitly out of scope** (adjacent work not covered here): Mailroom sorting before AP receives the bag; bank portal reconciliation next morning; customer payment application after deposit; stop-payment requests.
 
 ## Systems and tools touched
@@ -55,16 +75,19 @@
 1. Accept the blue mesh bag from the mailroom runner and initial the runner log.
 2. Date-stamp the outside of each envelope with today's date.
 3. Open MailRoom Pro → **Intake** → **New batch** → date defaults to today → confirm.
-4. Open envelopes one at a time at the scanner station. For each envelope that contains a cheque payable to Northwind Desk Services (or acceptable DBA on the wall list):
-   1. Scan the cheque face and any remittance stub.
-   2. In MailRoom Pro, add the scan to today's batch.
-   3. Write the MailRoom Pro item number lightly in pencil on the remittance stub (not on the cheque face).
-5. If the envelope contents are not a cheque, follow decision **D1**.
-6. When all envelopes are processed, run MailRoom Pro → **Close intake batch** and note the batch ID on the paper batch cover sheet.
-7. Open LedgerApp → **Deposits** → **New deposit from MailRoom batch** → select today's batch ID.
-8. Verify the cheque count and total on screen against the paper cover sheet. If they differ, follow exception **E1** — do not submit.
-9. Submit the deposit batch in LedgerApp (Jordan may submit under normal limits; see **D2**).
-10. Export the deposit confirmation PDF to `\\files\ap\deposits\YYYY-MM-DD-batch.pdf`.
+4. Open envelopes one at a time at the scanner station:
+   1. If the envelope contains no cheque, follow decision **D1**.
+   2. If the cheque payee is not Northwind Desk Services (or an acceptable DBA on the wall list), follow decision **D3**.
+   3. If the cheque is unsigned, follow exception **E2**.
+   4. If the cheque is post-dated, follow exception **E3**.
+   5. If the approved scanner station is unavailable, follow exception **E4**.
+   6. For an eligible cheque, scan the cheque face and any remittance stub, add the scan to today's MailRoom Pro batch, and write the MailRoom Pro item number lightly in pencil on the remittance stub (not on the cheque face).
+5. When all envelopes are processed, run MailRoom Pro → **Close intake batch** and note the batch ID on the paper batch cover sheet.
+6. Open LedgerApp → **Deposits** → **New deposit from MailRoom batch** → select today's batch ID.
+7. Verify the cheque count and total on screen against the paper cover sheet. If they differ, follow exception **E1** — do not submit.
+8. Follow decision **D2** before any submission.
+9. Submit the deposit only when D2 directs the AP clerk to submit it. If Rivera must approve, wait for Rivera's approved submission before continuing.
+10. After submission, export the deposit confirmation PDF to `\\files\ap\deposits\YYYY-MM-DD-batch.pdf`.
 11. Place physical cheques and cover sheet in the sealed pouch, drop into the locked treasury pickup drawer, and initial the drawer log.
 12. Return empty blue bag to the mailroom shelf.
 
@@ -73,17 +96,17 @@
 | ID | When | Options | Who decides | Next step / path |
 |---|---|---|---|---|
 | D1 | Envelope has no cheque (invoice only, junk, or misdelivered) | (a) Invoice only → place in "remit advice" tray; (b) Misdelivered personal mail → return to mailroom; (c) Unknown → Rivera review tray | AP clerk | Do not add to MailRoom batch |
-| D2 | LedgerApp shows deposit total at or above the on-screen approval threshold | (a) Under threshold → AP clerk submits; (b) At/over threshold → save as pending and notify Rivera | AP clerk recognizes; Rivera approves | Do not bypass approval |
-| D3 | Cheque payee is not on the acceptable payee wall list | Do not deposit; place in Rivera review tray with sticky note | AP clerk | Out of happy path |
+| D2 | After counts match, inspect LedgerApp's on-screen approval-status control | (a) Control explicitly shows **no approval required** → AP clerk submits at step 9; (b) Control shows **approval required** → save as pending and notify Rivera; (c) Control is unavailable, blank, or unreliable → do not submit; stop and escalate to Rivera | AP clerk recognizes; Rivera approves or submits | Do not infer "no approval required" from a missing control. Continue at step 10 only after submission |
+| D3 | Cheque payee is not on the acceptable payee wall list | Do not scan or deposit; place in Rivera review tray with sticky note | AP clerk | Continue with the next envelope at step 4 |
 
 ## Exceptions and edge cases
 
 | Trigger | What to do | Resume point | Escalate if |
 |---|---|---|---|
-| E1 — Count or total mismatch between MailRoom Pro and LedgerApp | Do not submit. Re-pull batch listing, rescan missing item if needed, fix in MailRoom Pro, refresh LedgerApp import | Step 8 | Cannot reconcile within 30 minutes → Rivera |
-| E2 — Unsigned cheque | Do not include in deposit. Place in Rivera review tray with envelope | Continue other items | Customer follow-up is Rivera's path (out of scope) |
-| E3 — Post-dated cheque | Hold in "post-date" sleeve labeled with date; do not scan into today's deposit | End of day log note | If date is next-day and volume high, ask Rivera whether early hold is OK |
-| E4 — Scanner PC down | Use phone photo only if Rivera approves for that day; otherwise hold unopened stamped envelopes in locked drawer and document outage | Resume at step 3 when scanner returns | Outage past 14:00 → Rivera decides partial vs full hold |
+| E1 — Count or total mismatch between MailRoom Pro and LedgerApp | Do not submit. Re-pull batch listing, rescan missing item if needed, fix in MailRoom Pro, refresh LedgerApp import | Step 7 | Cannot reconcile within 30 minutes → Rivera |
+| E2 — Unsigned cheque | Do not scan or include in deposit. Place in Rivera review tray with envelope | Continue with the next envelope at step 4 | Customer follow-up is Rivera's path (out of scope) |
+| E3 — Post-dated cheque | Hold in "post-date" sleeve labeled with date; do not scan into today's deposit | Continue with the next envelope at step 4 | If date is next-day and volume high, ask Rivera whether early hold is OK |
+| E4 — Scanner PC down | Do not use a phone, personal device, or unapproved capture method. Leave the current MailRoom Pro batch open, record its ID on the cover sheet, and hold remaining date-stamped envelopes and any opened items in the locked drawer; document the outage and notify IT | Reopen the **same** batch and resume at step 4 when the approved scanner returns; do not create a second batch | Outage past 14:00 → Rivera decides partial vs full hold |
 
 ## Pitfalls and tribal knowledge
 
@@ -127,8 +150,8 @@
 
 | ID | Gap | Why it matters | Owner | Disposition |
 |---|---|---|---|---|
-| Q1 | Exact LedgerApp approval threshold amount changes periodically and is not printed on the wall list | New clerk must trust on-screen flag; offline contingency unclear if LedgerApp is up but flag missing | Rivera | deferred — train "believe the on-screen threshold flag"; revisit if flag fails |
-| Q2 | Whether foreign-currency cheques ever arrive | No step exists today | Jordan | out of scope — none observed in 18 months; open new capture if one arrives |
+| Q2 | Written fallback if the approval-status control is unavailable and Rivera cannot respond before the deposit deadline | D2 safely stops submission, but a business-continuity rule is not yet defined | Rivera | deferred — do not submit; revisit when owner defines a fallback |
+| Q3 | Whether foreign-currency cheques ever arrive | No step exists today | Jordan | out of scope — none observed in 18 months; open new capture if one arrives |
 
 ## Sign-off
 
@@ -143,8 +166,17 @@
 > above. Known gaps remain only in **Open questions / unresolved gaps** with
 > disposition `deferred` or `out of scope`.
 
+## LLM attachment boundary
+
+This signed example is the canonical process artifact. A real organization
+would attach a complete, chat-safe session copy when its LLM chat is not
+approved for the canonical copy's names, internal evidence locations, or
+other identifiers. That temporary copy would use roles such as `AP clerk` and
+`controller`; it would not replace this signed artifact or include the raw
+source transcript.
+
 ## Revision history
 
 | Version | Date | Author | Summary |
 |---|---|---|---|
-| 1.0 | 2026-07-15 | Sam (facilitator), Jordan (SME) | Initial signed capture after one mail-day observation and one correction pass |
+| 1.0 | 2026-07-15 | Sam (facilitator), Jordan (SME) | Initial signed capture after transcript normalization, one mail-day observation, and one correction pass |

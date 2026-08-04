@@ -9,7 +9,7 @@ under [`../templates/`](../templates/) as the durable output shape.
 |---|---|---|
 | 0 | [Consultant-lane contract](00-consultant-lane-contract.md) | Facilitator and LLM follow evidence-only capture rules and gate on SME sign-off. |
 | 1 | [Prepare and scope](01-prepare-and-scope.md) | One process is named, bounded, owned, and agreed before elicitation. |
-| 2 | [Elicitation and shadowing](02-elicitation-and-shadowing.md) | Steps, systems, exceptions, and pitfalls are gathered from the SME without inventing content. |
+| 2 | [Elicitation and shadowing](02-elicitation-and-shadowing.md) | Guided elicitation or retained-evidence normalization produces source-tagged candidates, contradictions, questions, and gaps without inventing content. |
 | 3 | [Drafting the process capture](03-drafting-the-process-capture.md) | Notes are structured into `PROCESS_CAPTURE.md` with gaps left explicit. |
 | 4 | [Validation and handoff](04-validation-and-handoff.md) | SME signs off; the artifact is versioned and ready for LLM attachment. |
 

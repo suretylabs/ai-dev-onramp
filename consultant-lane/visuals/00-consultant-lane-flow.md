@@ -28,21 +28,28 @@ flowchart TB
     class g1 gate
     style prep fill:#ffffff,stroke:#cbd5e1
 
-    g1 -->|"no"| p2
-    g1 -->|"yes"| e1
+    g1 -.->|"no"| p2
+    g1 -->|"yes"| e0
 
-    subgraph elicit["2. Elicit"]
+    subgraph elicit["2. Gather and normalize evidence"]
         direction TB
-        e1["Observe real work or interview SME"] --> e2["Capture happy path and branches"]
-        e2 --> e3["Record systems by role — never credentials"]
-        e3 --> e4["Ask pitfalls new people hit"]
-        e4 --> g2{"Evidence sufficient for draft?"}
+        e0{"Entry path?"}
+        e1["Guided elicitation<br/>observe, walk through, or interview SME"]
+        e2["Existing evidence dump<br/>transcript, notes, SOP, or sanitized excerpt"]
+        e3["Retain source separately<br/>record lightweight provenance"]
+        e4["Normalize candidates<br/>classify claims and preserve SME terms"]
+        e5["List contradictions, time dependencies,<br/>targeted questions, and open gaps"]
+        e0 -->|"guided"| e1
+        e0 -->|"existing evidence"| e2
+        e1 --> e3
+        e2 --> e3
+        e3 --> e4 --> e5 --> g2{"Evidence sufficient for draft?"}
     end
-    class e1,e2,e3,e4 delivery
-    class g2 gate
+    class e1,e2,e3,e4,e5 delivery
+    class e0,g2 gate
     style elicit fill:#ffffff,stroke:#cbd5e1
 
-    g2 -->|"no — more gaps"| e1
+    g2 -.->|"no — more gaps"| e0
     g2 -->|"yes"| d1
 
     subgraph draft["3. Draft"]
@@ -57,17 +64,17 @@ flowchart TB
     class g3 gate
     style draft fill:#ffffff,stroke:#cbd5e1
 
-    g3 -->|"no — invented or missing tags"| d1
+    g3 -.->|"no — invented or missing tags"| d1
     g3 -->|"yes"| v1
 
     subgraph validate["4. Validate and hand off"]
         direction TB
         v1["Walk draft with SME"] --> v2["Disposition every open question"]
         v2 --> g4{"SME sign-off?"}
-        g4 -->|"no — corrections"| d1
+        g4 -.->|"no — corrections"| d1
         g4 -->|"yes"| v3[("Signed PROCESS_CAPTURE.md")]
         v3 --> v4["Version and store canonically"]
-        v4 --> v5["Attach complete file to new hire LLM session"]
+        v4 --> v5["Attach complete approved<br/>procedure context to LLM"]
         v5 --> v6(["New hire follows process<br/>without invented steps"])
     end
     class v1,v2,v4,v5 model

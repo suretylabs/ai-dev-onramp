@@ -14,4 +14,12 @@ internal owner.
 
 Do not invent content to fill empty sections. Leave unknowns in **Open
 questions / unresolved gaps** until the SME supplies them or the scope is
-explicitly reduced.
+explicitly reduced. Retain raw transcripts, notes, screenshots, and other
+source evidence separately in an approved client location; use the
+`PROCESS_CAPTURE.md` provenance table to reference them rather than embedding
+large source material in the durable process artifact.
+
+When a process capture is attached to an LLM, use the canonical signed file
+only where its contents are approved for that chat. Otherwise attach a
+complete chat-safe session copy that replaces prohibited identifiers and
+locations without becoming a second canonical process artifact.
